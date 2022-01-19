@@ -9,9 +9,11 @@ const HeaderCardButton = props => {
 
   const openModalHandler = () => setShowModal(true);
 
+  const closeModalHandler = () => setShowModal(false);
+
   return (
     <>
-      {showModal && <Cart />}
+      {showModal && <Cart onCloseModal={closeModalHandler} />}
       <button className={styles.button} onClick={openModalHandler}>
         <span className={styles.icon}>
           <CartIcon />
