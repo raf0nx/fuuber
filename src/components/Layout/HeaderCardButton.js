@@ -1,25 +1,25 @@
-import { useState } from "react";
+import { useContext } from "react";
 
 import CartIcon from "../Cart/CartIcon";
-import Cart from "../Cart/Cart";
+import CartContext from "../../store/cart-context";
 import styles from "./HeaderCardButton.module.css";
 
 const HeaderCardButton = props => {
-  const [showModal, setShowModal] = useState(false);
+  const cartCtx = useContext(CartContext);
 
-  const openModalHandler = () => setShowModal(true);
-
-  const closeModalHandler = () => setShowModal(false);
+  const numberOfCartItems = cartCtx.items.reduce(
+    (totalItems, item) => totalItems + item.amount,
+    0
+  );
 
   return (
     <>
-      {showModal && <Cart onCloseModal={closeModalHandler} />}
-      <button className={styles.button} onClick={openModalHandler}>
+      <button className={styles.button} onClick={props.onClick}>
         <span className={styles.icon}>
           <CartIcon />
         </span>
         <span>Your Cart</span>
-        <span className={styles.badge}>3</span>
+        <span className={styles.badge}>{numberOfCartItems}</span>
       </button>
     </>
   );
