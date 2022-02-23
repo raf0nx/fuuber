@@ -6,24 +6,50 @@ import styles from './AvailableMeals.module.css';
 
 const AvailableMeals = () => {
   const [meals, setMeals] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState(null);
 
   useEffect(() => {
     const fetchMeals = async () => {
-      const response = await fetch(
-        'https://my-http-bd4b7-default-rtdb.europe-west1.firebasedatabase.app/meals.json'
-      );
-      const responseData = await response.json();
+      try {
+        const response = await fetch(
+          'https://my-http-bd4b7-default-rtdb.europe-west1.firebasedatabase.app/meals.json'
+        );
+        const responseData = await response.json();
 
-      const mappedMeals = Object.entries(responseData).map(([key, value]) => ({
-        id: key,
-        ...value,
-      }));
+        const mappedMeals = Object.entries(responseData).map(
+          ([key, value]) => ({
+            id: key,
+            ...value,
+          })
+        );
 
-      setMeals(mappedMeals);
+        setMeals(mappedMeals);
+      } catch (error) {
+        setError(error.message);
+      }
+
+      setIsLoading(false);
     };
 
     fetchMeals();
   }, []);
+
+  if (error) {
+    return (
+      <section className={styles["meals-error"]}>
+        <p>{error}</p>
+      </section>
+    );
+  }
+
+  if (isLoading) {
+    return (
+      <section className={styles['meals-loading']}>
+        <p>Loading...</p>
+      </section>
+    );
+  }
 
   const mealsList = meals.map(meal => (
     <MealItem
