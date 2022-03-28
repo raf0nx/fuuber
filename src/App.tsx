@@ -1,11 +1,11 @@
-import './App.css';
-
-function App() {
+const App: React.FC = () => {
   return (
-    <div className="App">
-      <header><h1>Hello world!</h1></header>
+    <div className="flex items-center justify-center h-screen">
+      <header>
+        <h1>Hello world!</h1>
+      </header>
     </div>
   );
-}
+};
 
 export default App;
