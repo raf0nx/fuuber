@@ -1,5 +1,5 @@
 const Auth: React.FC = () => {
-  return <div>Sign in</div>;
-};
+  return <div>Sign in</div>
+}
 
-export default Auth;
+export default Auth
