@@ -5,12 +5,12 @@ import Home from './pages/Home'
 
 const App: React.FC = () => {
   return (
-    <div id="app">
+    <main id="app" className="h-screen w-screen">
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/auth" element={<Auth />} />
       </Routes>
-    </div>
+    </main>
   )
 }
 
