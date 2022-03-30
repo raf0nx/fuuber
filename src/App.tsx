@@ -1,6 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 
-import LoginPage from './pages/LoginPage'
+import Auth from './pages/Auth'
 import Home from './pages/Home'
 
 const App: React.FC = () => {
@@ -8,7 +8,7 @@ const App: React.FC = () => {
     <main id="app" className="h-screen w-screen">
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/sign-in" element={<LoginPage />} />
+        <Route path="/auth" element={<Auth />} />
       </Routes>
     </main>
   )

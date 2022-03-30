@@ -1,5 +1,6 @@
 interface CardProps {
   title: string
+  className?: string
   subtitle?: string
   actions?: JSX.Element
   actionsClasses?: string
@@ -8,12 +9,17 @@ interface CardProps {
 const Card: React.FC<CardProps> = ({
   children,
   title,
+  className,
   subtitle,
   actions,
   actionsClasses,
 }) => {
   return (
-    <div className="bg-white p-6 rounded shadow-md shadow-white">
+    <div
+      className={`bg-white p-6 rounded shadow-md shadow-white ${
+        className || ''
+      }`}
+    >
       <h1 className="text-2xl antialiased font-bold text-gray-800 mb-2">
         {title}
       </h1>

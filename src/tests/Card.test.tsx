@@ -3,6 +3,7 @@ import { render, screen } from '@testing-library/react'
 import Card from '../components/UI/Card'
 
 test('Card component renders successfully with its props and children', () => {
+  // Given
   const actionBtn = <button>Click me!</button>
 
   render(
@@ -16,6 +17,7 @@ test('Card component renders successfully with its props and children', () => {
   const childrenContent = screen.getByText(/some dummy content/i)
   const actions = screen.getByText(/click me!/i)
 
+  // Then
   expect(cardTitle).toBeInTheDocument()
   expect(cardSubtitle).toBeInTheDocument()
   expect(childrenContent).toBeInTheDocument()
