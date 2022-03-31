@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import Auth from '../pages/Auth'
 
-describe('Auth Page', () => {
+describe('<Auth />', () => {
   test('should change auth mode', () => {
     // Given
     render(<Auth />)

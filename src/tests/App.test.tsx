@@ -3,7 +3,7 @@ import { BrowserRouter } from 'react-router-dom'
 
 import App from '../App'
 
-test('App component renders successfully', () => {
+test('<App /> should render successfully', () => {
   render(
     <BrowserRouter>
       <App />
