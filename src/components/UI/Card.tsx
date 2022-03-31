@@ -20,7 +20,7 @@ const Card: React.FC<CardProps> = ({
         className || ''
       }`}
     >
-      <h1 className="text-2xl antialiased font-bold text-gray-800 mb-2">
+      <h1 className="text-2xl antialiased font-bold text-gray-700 mb-2">
         {title}
       </h1>
       {subtitle && <h2 className="text-sm opacity-60">{subtitle}</h2>}
