@@ -5,6 +5,12 @@ module.exports = {
       width: {
         128: '32rem',
       },
+			top: {
+				"2px": "2px",
+			},
+			translate: {
+				"5.5": "1.375rem",
+			},
     },
   },
   plugins: [],
