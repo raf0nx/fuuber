@@ -1,7 +1,5 @@
 import { ChangeEvent } from 'react'
 
-import './Input.css'
-
 interface InputProps {
   id: string
   formId?: string
@@ -38,13 +36,19 @@ const Input: React.FC<InputProps> = ({
   blurHandler,
 }) => {
   return (
-    <label className="relative" htmlFor={id}>
+    <>
+      <label
+        className="inline-block mb-2 text-sm font-medium text-gray-900"
+        htmlFor={id}
+      >
+        {label}
+      </label>
       <input
         id={id}
         form={formId}
         type={type}
         value={value}
-        className={`w-full border-2 border-gray-300 border-opacity-50 px-4 py-2 rounded shadow-sm hover:border-opacity-100 focus:outline-none focus:border-indigo-500 transition duration-200 ${classes}`}
+        className={`bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 block w-full p-2.5 transition duration-200 ${classes}`}
         name={name}
         placeholder={placeholder}
         step={step}
@@ -57,14 +61,7 @@ const Input: React.FC<InputProps> = ({
         onFocus={focusHandler}
         onBlur={blurHandler}
       />
-      <span
-        className={`text-gray-700 text-opacity-80 absolute -top-[2px] left-0 mx-3 px-1 transition duration-200 input-label ${
-          value || placeholder ? 'input-label--focus' : ''
-        }`}
-      >
-        {label}
-      </span>
-    </label>
+    </>
   )
 }
 
