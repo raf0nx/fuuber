@@ -5,16 +5,16 @@ import './Input.css'
 interface InputProps {
   id: string
   formId?: string
-  type: string
-  value: string
   label: string
+  value: string
+  type: string
   name?: string
   placeholder?: string
   step?: number
   min?: number
   max?: number
   required?: boolean
-	classes?: string,
+  classes?: string
   changeHandler: (event: ChangeEvent<HTMLInputElement>) => void
   focusHandler?: () => void
   blurHandler?: () => void
@@ -32,7 +32,7 @@ const Input: React.FC<InputProps> = ({
   min,
   max,
   required,
-	classes,
+  classes = '',
   changeHandler,
   focusHandler,
   blurHandler,
@@ -44,7 +44,7 @@ const Input: React.FC<InputProps> = ({
         form={formId}
         type={type}
         value={value}
-        className={`w-full border-2 border-gray-300 border-opacity-50 px-4 py-2 rounded shadow-sm hover:border-opacity-100 focus:outline-none focus:border-indigo-500 transition duration-200 ${classes || ''}`}
+        className={`w-full border-2 border-gray-300 border-opacity-50 px-4 py-2 rounded shadow-sm hover:border-opacity-100 focus:outline-none focus:border-indigo-500 transition duration-200 ${classes}`}
         name={name}
         placeholder={placeholder}
         step={step}
@@ -57,7 +57,11 @@ const Input: React.FC<InputProps> = ({
         onFocus={focusHandler}
         onBlur={blurHandler}
       />
-      <span className={`text-gray-700 text-opacity-80 absolute -top-[2px] left-0 mx-3 px-1 transition duration-200 input-label ${value || placeholder ? 'input-label--focus' : ''}`}>
+      <span
+        className={`text-gray-700 text-opacity-80 absolute -top-[2px] left-0 mx-3 px-1 transition duration-200 input-label ${
+          value || placeholder ? 'input-label--focus' : ''
+        }`}
+      >
         {label}
       </span>
     </label>

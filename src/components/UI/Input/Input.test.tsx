@@ -25,26 +25,5 @@ describe('<Input />', () => {
 
     // Then
     expect(onChangeHandler).toBeCalled()
-    expect(screen.getByText('Input label')).toHaveClass('input-label--focus')
-  })
-
-  test("should not have 'input-label--focus' class when no value or placeholder is provided", () => {
-    // Given
-    const onChangeHandler = jest.fn()
-
-    render(
-      <Input
-        id="testId"
-        type="text"
-        value=""
-        label="Input label"
-        changeHandler={onChangeHandler}
-      />
-    )
-
-    // Then
-    expect(screen.getByText('Input label')).not.toHaveClass(
-      'input-label--focus'
-    )
   })
 })

@@ -12,7 +12,7 @@ const Button: React.FC<ButtonProps> = ({
   text,
   category,
   type = 'button',
-  name = '',
+  name,
   disabled = false,
   classes = '',
   clickHandler,
