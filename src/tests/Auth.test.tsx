@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Auth from '../pages/Auth'
+import Auth from '../pages/Auth/Auth'
 
 describe('<Auth />', () => {
   test('should change auth mode', () => {

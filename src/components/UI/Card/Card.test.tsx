@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react'
 
-import Card from '../components/UI/Card'
+import Card from './Card'
 
 test('<Card /> should render successfully with its props and children', () => {
   render(

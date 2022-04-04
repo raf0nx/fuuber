@@ -1,8 +1,8 @@
 import { useState } from 'react'
 
-import Card from '../components/UI/Card'
+import Card from '../../components/UI/Card/Card'
 
-import authBackground from '../assets/auth-background.webp'
+import authBackground from '../../assets/auth-background.webp'
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
