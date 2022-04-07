@@ -1,5 +1,3 @@
-import { ChangeEvent } from 'react'
-
 interface InputProps {
   id: string
   formId?: string
@@ -13,7 +11,7 @@ interface InputProps {
   max?: number
   required?: boolean
   classes?: string
-  changeHandler: (event: ChangeEvent<HTMLInputElement>) => void
+  changeHandler: (value: string) => void
   focusHandler?: () => void
   blurHandler?: () => void
 }
@@ -56,7 +54,7 @@ const Input: React.FC<InputProps> = ({
         max={max}
         required={required}
         onChange={event => {
-          changeHandler(event)
+          changeHandler(event.target.value)
         }}
         onFocus={focusHandler}
         onBlur={blurHandler}
