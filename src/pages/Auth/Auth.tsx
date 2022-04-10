@@ -7,7 +7,7 @@ import Button from '../../components/UI/Button/Button'
 
 import { signIn, signUp } from '../../api/auth'
 
-import { UserData } from '../../types/user'
+import { AuthFormUserData } from '../../types/user'
 
 import authBackground from '../../assets/auth-background.webp'
 
@@ -19,7 +19,7 @@ const initialUserData = {
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
-  const [userData, setUserData] = useState<UserData>(initialUserData)
+  const [userData, setUserData] = useState<AuthFormUserData>(initialUserData)
 
   const navigate = useNavigate()
 

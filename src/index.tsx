@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { initializeApp } from 'firebase/app'
 import axios from 'axios'
+import { Provider } from 'react-redux'
 
 import App from './App'
 
+import { store } from './store/store'
 import reportWebVitals from './reportWebVitals'
 import { firebaseConfig } from './utils/config'
 
@@ -20,9 +22,11 @@ axios.interceptors.response.use(
 
 ReactDOM.render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <Provider store={store}>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 )

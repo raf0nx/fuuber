@@ -3,12 +3,12 @@ import { SignInResponse, SignUpResponse } from '../types/auth-api'
 
 import { firebaseConfig } from '../utils/config'
 
-import { UserData } from '../types/user'
+import { AuthFormUserData } from '../types/user'
 
 const URL_PREFIX = 'https://identitytoolkit.googleapis.com/v1/accounts'
 
 export const signUp = (
-  payload: UserData
+  payload: AuthFormUserData
 ): Promise<AxiosResponse<SignUpResponse>> => {
   return axios.post(
     `${URL_PREFIX}:signUp?key=${firebaseConfig.apiKey}`,
