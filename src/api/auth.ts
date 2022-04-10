@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios'
-import { SignInResponse, SignUpResponse } from '../types/auth-api'
+import { AuthResponse } from '../types/auth-api'
 
 import { firebaseConfig } from '../utils/config'
 
@@ -9,19 +9,19 @@ const URL_PREFIX = 'https://identitytoolkit.googleapis.com/v1/accounts'
 
 export const signUp = (
   payload: AuthFormUserData
-): Promise<AxiosResponse<SignUpResponse>> => {
-  return axios.post(
-    `${URL_PREFIX}:signUp?key=${firebaseConfig.apiKey}`,
-    payload
-  )
+): Promise<AxiosResponse<AuthResponse>> => {
+  return axios.post(`${URL_PREFIX}:signUp?key=${firebaseConfig.apiKey}`, {
+    ...payload,
+    returnSecureToken: true,
+  })
 }
 
 export const signIn = (payload: {
   email: string
   password: string
-}): Promise<AxiosResponse<SignInResponse>> => {
+}): Promise<AxiosResponse<AuthResponse>> => {
   return axios.post(
     `${URL_PREFIX}:signInWithPassword?key=${firebaseConfig.apiKey}`,
-    payload
+    { ...payload, returnSecureToken: true }
   )
 }

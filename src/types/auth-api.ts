@@ -1,12 +1,10 @@
-export interface SignUpResponse {
+export interface AuthResponse {
   displayName: string
   idToken: string
   email: string
   refreshToken: string
   expiresIn: string
   localId: string
-}
-
-export interface SignInResponse extends SignUpResponse {
-  registered: boolean
+  kind: string
+  registered?: boolean
 }
