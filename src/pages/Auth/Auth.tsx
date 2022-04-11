@@ -5,13 +5,15 @@ import Card from '../../components/UI/Card/Card'
 import Input from '../../components/UI/Input/Input'
 import Button from '../../components/UI/Button/Button'
 
-import { signIn, signUp } from '../../api/auth'
+import { useSignInMutation, useSignUpMutation } from '../../api/auth'
+import { useAppDispatch } from '../../hooks/store-hooks'
+import { setTokenData, setUser } from '../../store/auth'
 
-import { AuthFormUserData } from '../../types/user'
+import { AuthFormData } from '../../types/auth'
 
 import authBackground from '../../assets/auth-background.webp'
 
-const initialUserData = {
+const initialAuthFormData = {
   email: '',
   displayName: '',
   password: '',
@@ -19,12 +21,49 @@ const initialUserData = {
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
-  const [userData, setUserData] = useState<AuthFormUserData>(initialUserData)
+  const [authFormData, setAuthFormData] =
+    useState<AuthFormData>(initialAuthFormData)
+
+  const dispatch = useAppDispatch()
+
+  const [signIn] = useSignInMutation()
+  const [signUp] = useSignUpMutation()
 
   const navigate = useNavigate()
 
   const switchAuthModeHandler = () => {
     setIsLogin(prevMode => !prevMode)
+  }
+
+  const emailChangeHandler = (email: string) => {
+    setAuthFormData(prevAuthFormData => ({ ...prevAuthFormData, email }))
+  }
+
+  const nameChangeHandler = (displayName: string) => {
+    setAuthFormData(prevAuthFormData => ({
+      ...prevAuthFormData,
+      displayName: displayName,
+    }))
+  }
+  const passwordChangeHandler = (password: string) => {
+    setAuthFormData(prevAuthFormData => ({ ...prevAuthFormData, password }))
+  }
+
+  const submitHandler = async (event: React.SyntheticEvent) => {
+    event.preventDefault()
+
+    try {
+      const { userData, tokenData } = isLogin
+        ? await signIn(authFormData).unwrap()
+        : await signUp(authFormData).unwrap()
+
+      dispatch(setUser(userData))
+      dispatch(setTokenData(tokenData))
+
+      navigate('/', { replace: true })
+    } catch (error) {
+      console.log(error)
+    }
   }
 
   const getAuthModeTitle = () =>
@@ -49,34 +88,6 @@ const Auth: React.FC = () => {
     </span>
   )
 
-  const emailChangeHandler = (email: string) => {
-    setUserData(prevUserData => ({ ...prevUserData, email }))
-  }
-
-  const nameChangeHandler = (displayName: string) => {
-    setUserData(prevUserData => ({ ...prevUserData, displayName: displayName }))
-  }
-  const passwordChangeHandler = (password: string) => {
-    setUserData(prevUserData => ({ ...prevUserData, password }))
-  }
-
-  const submitHandler = async (event: React.SyntheticEvent) => {
-    event.preventDefault()
-
-    try {
-      isLogin
-        ? await signIn({
-            email: userData.email,
-            password: userData.password,
-          })
-        : await signUp(userData)
-
-      navigate('/', { replace: true })
-    } catch (error) {
-      console.log(error)
-    }
-  }
-
   return (
     <section className="w-full h-full flex justify-evenly items-center">
       <img
@@ -98,7 +109,7 @@ const Auth: React.FC = () => {
             type="email"
             label="E-mail address"
             required={true}
-            value={userData.email}
+            value={authFormData.email}
             changeHandler={emailChangeHandler}
             classes="mb-4"
           />
@@ -108,7 +119,7 @@ const Auth: React.FC = () => {
               type="text"
               label="Name"
               required={true}
-              value={userData.displayName}
+              value={authFormData.displayName}
               changeHandler={nameChangeHandler}
               classes="mb-4"
             />
@@ -118,7 +129,7 @@ const Auth: React.FC = () => {
             type="password"
             label="Password"
             required={true}
-            value={userData.password}
+            value={authFormData.password}
             changeHandler={passwordChangeHandler}
             classes="mb-6"
           />

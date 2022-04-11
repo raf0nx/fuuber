@@ -1,3 +1,5 @@
+import { TokenData, User } from './auth'
+
 export interface AuthResponse {
   displayName: string
   idToken: string
@@ -7,4 +9,9 @@ export interface AuthResponse {
   localId: string
   kind: string
   registered?: boolean
+}
+
+export interface TransformedAuthResponse {
+  userData: User
+  tokenData: TokenData
 }
