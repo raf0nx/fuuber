@@ -2,7 +2,6 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import { BrowserRouter } from 'react-router-dom'
 import { initializeApp } from 'firebase/app'
-import axios from 'axios'
 import { Provider } from 'react-redux'
 
 import App from './App'
@@ -14,11 +13,6 @@ import { firebaseConfig } from './utils/config'
 import './index.css'
 
 initializeApp(firebaseConfig)
-
-axios.interceptors.response.use(
-  response => response,
-  error => Promise.reject(error.response.data.error)
-)
 
 ReactDOM.render(
   <React.StrictMode>
