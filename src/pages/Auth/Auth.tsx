@@ -110,7 +110,7 @@ const Auth: React.FC = () => {
             label="E-mail address"
             required={true}
             value={authFormData.email}
-            changeHandler={emailChangeHandler}
+            onChange={emailChangeHandler}
             classes="mb-4"
           />
           {!isLogin && (
@@ -120,7 +120,7 @@ const Auth: React.FC = () => {
               label="Name"
               required={true}
               value={authFormData.displayName}
-              changeHandler={nameChangeHandler}
+              onChange={nameChangeHandler}
               classes="mb-4"
             />
           )}
@@ -130,7 +130,7 @@ const Auth: React.FC = () => {
             label="Password"
             required={true}
             value={authFormData.password}
-            changeHandler={passwordChangeHandler}
+            onChange={passwordChangeHandler}
             classes="mb-6"
           />
           <Button

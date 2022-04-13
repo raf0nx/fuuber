@@ -11,9 +11,9 @@ interface InputProps {
   max?: number
   required?: boolean
   classes?: string
-  changeHandler: (value: string) => void
-  focusHandler?: () => void
-  blurHandler?: () => void
+  onChange: (value: string) => void
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 const Input: React.FC<InputProps> = ({
@@ -29,9 +29,9 @@ const Input: React.FC<InputProps> = ({
   max,
   required,
   classes = '',
-  changeHandler,
-  focusHandler,
-  blurHandler,
+  onChange,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <>
@@ -54,10 +54,10 @@ const Input: React.FC<InputProps> = ({
         max={max}
         required={required}
         onChange={event => {
-          changeHandler(event.target.value)
+          onChange(event.target.value)
         }}
-        onFocus={focusHandler}
-        onBlur={blurHandler}
+        onFocus={onFocus}
+        onBlur={onBlur}
       />
     </>
   )

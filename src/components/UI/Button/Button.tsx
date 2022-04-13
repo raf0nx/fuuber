@@ -5,7 +5,7 @@ interface ButtonProps {
   name?: string
   disabled?: boolean
   classes?: string
-  clickHandler?: () => void
+  onClick?: () => void
 }
 
 const Button: React.FC<ButtonProps> = ({
@@ -15,7 +15,7 @@ const Button: React.FC<ButtonProps> = ({
   name,
   disabled = false,
   classes = '',
-  clickHandler,
+  onClick,
 }) => {
   let styles =
     'text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-300'
@@ -35,7 +35,7 @@ const Button: React.FC<ButtonProps> = ({
       type={type}
       name={name}
       disabled={disabled}
-      onClick={clickHandler}
+      onClick={onClick}
     >
       {text}
     </button>

@@ -13,7 +13,7 @@ describe('<Input />', () => {
         type="text"
         value="Test value"
         label="Input label"
-        changeHandler={onChangeHandler}
+        onChange={onChangeHandler}
       />
     )
 
