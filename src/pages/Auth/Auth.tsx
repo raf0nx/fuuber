@@ -61,9 +61,7 @@ const Auth: React.FC = () => {
       dispatch(setTokenData(tokenData))
 
       navigate('/', { replace: true })
-    } catch (error) {
-      console.log(error)
-    }
+    } catch (error) {}
   }
 
   const getAuthModeTitle = () =>
