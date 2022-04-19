@@ -12,6 +12,7 @@ import { setTokenData, setUser } from '../../store/auth'
 import { AuthFormData } from '../../types/auth'
 
 import authBackground from '../../assets/auth-background.webp'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 const initialAuthFormData = {
   email: '',
@@ -26,13 +27,13 @@ const Auth: React.FC = () => {
 
   const dispatch = useAppDispatch()
 
-  const [signIn] = useSignInMutation()
-  const [signUp] = useSignUpMutation()
+  const [signIn, { isLoading: isSigningIn }] = useSignInMutation()
+  const [signUp, { isLoading: isSigningUp }] = useSignUpMutation()
 
   const navigate = useNavigate()
 
   const switchAuthModeHandler = () => {
-    setIsLogin(prevMode => !prevMode)
+    !isSigningIn && !isSigningUp && setIsLogin(prevMode => !prevMode)
   }
 
   const emailChangeHandler = (email: string) => {
@@ -76,7 +77,9 @@ const Auth: React.FC = () => {
     <span className="text-xs select-none text-gray-900">
       {isLogin ? "Don't have an account? " : 'Already have an account? '}
       <div
-        className="text-indigo-500 inline-block font-bold cursor-pointer"
+        className={`text-indigo-500 inline-block font-bold cursor-pointer ${
+          isSigningIn || isSigningUp ? 'cursor-not-allowed text-indigo-300' : ''
+        }`}
         onClick={switchAuthModeHandler}
         tabIndex={0}
         role="button"
@@ -85,6 +88,14 @@ const Auth: React.FC = () => {
       </div>
     </span>
   )
+
+  const submitButtonContent = () => {
+    if (isSigningIn || isSigningUp) {
+      return <Spinner>Please wait...</Spinner>
+    }
+
+    return isLogin ? 'Sign In' : 'Create Account'
+  }
 
   return (
     <section className="w-full h-full flex justify-evenly items-center">
@@ -110,6 +121,7 @@ const Auth: React.FC = () => {
             value={authFormData.email}
             onChange={emailChangeHandler}
             classes="mb-4"
+            disabled={isSigningIn || isSigningUp}
           />
           {!isLogin && (
             <Input
@@ -120,6 +132,7 @@ const Auth: React.FC = () => {
               value={authFormData.displayName}
               onChange={nameChangeHandler}
               classes="mb-4"
+              disabled={isSigningIn || isSigningUp}
             />
           )}
           <Input
@@ -130,14 +143,17 @@ const Auth: React.FC = () => {
             value={authFormData.password}
             onChange={passwordChangeHandler}
             classes="mb-6"
+            disabled={isSigningIn || isSigningUp}
           />
           <Button
-            text={isLogin ? 'Sign In' : 'Create Account'}
             category="primary"
             type="submit"
             name="Submit Button"
-            classes="w-full"
-          />
+            classes="w-full flex justify-center items-center"
+            disabled={isSigningIn || isSigningUp}
+          >
+            {submitButtonContent()}
+          </Button>
         </form>
       </Card>
     </section>

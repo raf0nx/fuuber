@@ -111,6 +111,7 @@ describe('<Auth />', () => {
     userEvent.click(signInButton)
 
     // Then
+    expect(screen.getByText(/please wait.../i)).toBeInTheDocument()
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalled())
   })
 
@@ -133,6 +134,7 @@ describe('<Auth />', () => {
     userEvent.click(signUpButton)
 
     // Then
+    expect(screen.getByText(/please wait.../i)).toBeInTheDocument()
     await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalled())
   })
 

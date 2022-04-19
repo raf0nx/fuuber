@@ -32,7 +32,8 @@
       "src/**/*.{js,jsx,ts,tsx}",
       "!src/index.tsx",
       "!src/reportWebVitals.ts",
-      "!src/store/store.ts"
+      "!src/store/store.ts",
+      "!src/components/UI/**/*"
     ]
   },
   "eslintConfig": {

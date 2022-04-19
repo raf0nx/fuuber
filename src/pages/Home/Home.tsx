@@ -29,7 +29,9 @@ const Home: React.FC = () => {
     <>
       <div>Welcome home!</div>
       <div>{user?.displayName}</div>
-      <Button text="Logout" category="primary" onClick={logoutHandler} />
+      <Button category="primary" onClick={logoutHandler}>
+        Logout
+      </Button>
     </>
   )
 }

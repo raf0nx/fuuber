@@ -11,6 +11,7 @@ interface InputProps {
   max?: number
   required?: boolean
   classes?: string
+  disabled?: boolean
   onChange: (value: string) => void
   onFocus?: () => void
   onBlur?: () => void
@@ -29,10 +30,20 @@ const Input: React.FC<InputProps> = ({
   max,
   required,
   classes = '',
+  disabled,
   onChange,
   onFocus,
   onBlur,
 }) => {
+  let styles =
+    'bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:border-opacity-0 block w-full p-2.5 transition duration-200'
+
+  if (disabled) {
+    styles = styles.concat(
+      ' cursor-not-allowed opacity-50 hover:border-opacity-50'
+    )
+  }
+
   return (
     <>
       <label
@@ -46,13 +57,14 @@ const Input: React.FC<InputProps> = ({
         form={formId}
         type={type}
         value={value}
-        className={`bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 block w-full p-2.5 transition duration-200 ${classes}`}
+        className={`${styles} ${classes}`}
         name={name}
         placeholder={placeholder}
         step={step}
         min={min}
         max={max}
         required={required}
+        disabled={disabled}
         onChange={event => {
           onChange(event.target.value)
         }}

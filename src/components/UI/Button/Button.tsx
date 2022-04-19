@@ -1,5 +1,4 @@
 interface ButtonProps {
-  text: string
   category: 'primary' | 'secondary' | 'error'
   type?: 'button' | 'submit' | 'reset'
   name?: string
@@ -9,7 +8,7 @@ interface ButtonProps {
 }
 
 const Button: React.FC<ButtonProps> = ({
-  text,
+  children,
   category,
   type = 'button',
   name,
@@ -19,6 +18,12 @@ const Button: React.FC<ButtonProps> = ({
 }) => {
   let styles =
     'text-white bg-indigo-500 hover:bg-indigo-600 focus:ring-indigo-300'
+
+  if (disabled) {
+    styles = styles.concat(
+      ' cursor-not-allowed bg-indigo-400 hover:bg-indigo-400'
+    )
+  }
 
   if (category === 'secondary') {
     styles =
@@ -37,7 +42,7 @@ const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       onClick={onClick}
     >
-      {text}
+      {children}
     </button>
   )
 }
