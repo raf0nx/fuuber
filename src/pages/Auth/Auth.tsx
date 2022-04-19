@@ -122,6 +122,7 @@ const Auth: React.FC = () => {
             onChange={emailChangeHandler}
             classes="mb-4"
             disabled={isSigningIn || isSigningUp}
+            placeholder="eat@food.com"
           />
           {!isLogin && (
             <Input
@@ -133,6 +134,7 @@ const Auth: React.FC = () => {
               onChange={nameChangeHandler}
               classes="mb-4"
               disabled={isSigningIn || isSigningUp}
+              placeholder="John Doe"
             />
           )}
           <Input
@@ -144,6 +146,7 @@ const Auth: React.FC = () => {
             onChange={passwordChangeHandler}
             classes="mb-6"
             disabled={isSigningIn || isSigningUp}
+            placeholder="••••••••"
           />
           <Button
             category="primary"
