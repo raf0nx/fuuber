@@ -16,6 +16,8 @@ const customRender = (
     store = configureStore({
       reducer: { auth: authReducer, [authApi.reducerPath]: authApi.reducer },
       preloadedState: initialState,
+      middleware: getDefaultMiddleware =>
+        getDefaultMiddleware().concat(authApi.middleware),
     }),
     ...renderOptions
   }: any = {}
