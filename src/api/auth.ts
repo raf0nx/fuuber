@@ -55,14 +55,33 @@ export const authApi = createApi({
         }
       },
     }),
-    getUserData: build.query<User[], string>({
+    getUserData: build.query<User, string>({
       query: idToken => ({
         url: `:lookup?key=${firebaseConfig.apiKey}`,
         method: 'POST',
         body: { idToken },
       }),
-      transformResponse: (response: { kind: string; users: User[] }) =>
-        response.users,
+      transformResponse: (response: { kind: string; users: User[] }) => {
+        // User data will be always stored at the 0 index of the response array
+        const {
+          localId,
+          email,
+          displayName,
+          emailVerified,
+          photoUrl,
+          createdAt,
+        } = response.users[0]
+
+        return {
+          localId,
+          email,
+          displayName,
+          emailVerified,
+          photoUrl,
+          createdAt,
+          incompleteData: false,
+        }
+      },
     }),
   }),
 })

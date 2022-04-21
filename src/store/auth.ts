@@ -36,22 +36,10 @@ export const authSlice = createSlice({
     logout: () => initialState,
   },
   extraReducers: builder => {
-    // TODO: Refactor this matcher (especially type assuming)
     builder.addMatcher(
       authApi.endpoints.getUserData.matchFulfilled,
       (state, { payload }) => {
-        const foundUser = payload.find(
-          user => user.localId === state.user?.localId
-        )!
-        state.user = {
-          localId: foundUser.localId,
-          email: foundUser.email,
-          displayName: foundUser.displayName,
-          emailVerified: foundUser.emailVerified,
-          photoUrl: foundUser.photoUrl,
-          createdAt: foundUser.createdAt,
-          incompleteData: false,
-        }
+        state.user = payload
       }
     )
   },
