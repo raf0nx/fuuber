@@ -4,6 +4,7 @@ import { Provider } from 'react-redux'
 
 import authReducer from '../store/auth'
 import { authApi } from '../api/auth'
+import { authMiddleware } from '../middlewares/auth-middleware'
 
 interface WrapperProps {
   children: JSX.Element
@@ -17,7 +18,7 @@ const customRender = (
       reducer: { auth: authReducer, [authApi.reducerPath]: authApi.reducer },
       preloadedState: initialState,
       middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(authApi.middleware),
+        getDefaultMiddleware().concat(authApi.middleware, authMiddleware),
     }),
     ...renderOptions
   }: any = {}
