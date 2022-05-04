@@ -9,7 +9,7 @@ export interface User {
   incompleteData?: boolean
 }
 
-export interface AuthFormData {
+export type AuthFormData = {
   email: string
   displayName: string
   password: string

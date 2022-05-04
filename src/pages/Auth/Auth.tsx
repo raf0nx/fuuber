@@ -1,9 +1,11 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useForm } from 'react-hook-form'
 
 import Card from '../../components/UI/Card/Card'
-import Input from '../../components/UI/Input/Input'
+import FormInput from '../../components/UI/Input/FormInput'
 import Button from '../../components/UI/Button/Button'
+import Spinner from '../../components/UI/Spinner/Spinner'
 
 import { useSignInMutation, useSignUpMutation } from '../../api/auth'
 import { useAppDispatch } from '../../hooks/store-hooks'
@@ -12,18 +14,10 @@ import { setTokenData, setUser } from '../../store/auth'
 import { AuthFormData } from '../../types/auth'
 
 import authBackground from '../../assets/auth-background.webp'
-import Spinner from '../../components/UI/Spinner/Spinner'
-
-const initialAuthFormData = {
-  email: '',
-  displayName: '',
-  password: '',
-}
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
-  const [authFormData, setAuthFormData] =
-    useState<AuthFormData>(initialAuthFormData)
+  const { register, handleSubmit } = useForm<AuthFormData>()
 
   const dispatch = useAppDispatch()
 
@@ -36,27 +30,11 @@ const Auth: React.FC = () => {
     !isSigningIn && !isSigningUp && setIsLogin(prevMode => !prevMode)
   }
 
-  const emailChangeHandler = (email: string) => {
-    setAuthFormData(prevAuthFormData => ({ ...prevAuthFormData, email }))
-  }
-
-  const nameChangeHandler = (displayName: string) => {
-    setAuthFormData(prevAuthFormData => ({
-      ...prevAuthFormData,
-      displayName: displayName,
-    }))
-  }
-  const passwordChangeHandler = (password: string) => {
-    setAuthFormData(prevAuthFormData => ({ ...prevAuthFormData, password }))
-  }
-
-  const submitHandler = async (event: React.SyntheticEvent) => {
-    event.preventDefault()
-
+  const submitHandler = async (data: AuthFormData) => {
     try {
       const { userData, tokenData } = isLogin
-        ? await signIn(authFormData).unwrap()
-        : await signUp(authFormData).unwrap()
+        ? await signIn(data).unwrap()
+        : await signUp(data).unwrap()
 
       dispatch(setUser(userData))
       dispatch(setTokenData(tokenData))
@@ -112,41 +90,41 @@ const Auth: React.FC = () => {
         actions={authPageAction}
         actionsClasses="flex justify-center"
       >
-        <form onSubmit={submitHandler}>
-          <Input
+        <form onSubmit={handleSubmit(submitHandler)}>
+          <FormInput
             id="email"
+            name="email"
             type="email"
             label="E-mail address"
             required={true}
-            value={authFormData.email}
-            onChange={emailChangeHandler}
-            classes="mb-4"
             disabled={isSigningIn || isSigningUp}
             placeholder="eat@food.com"
+            classes="mb-4"
+            register={register}
           />
           {!isLogin && (
-            <Input
-              id="name"
+            <FormInput
+              id="displayName"
+              name="displayName"
               type="text"
               label="Name"
               required={true}
-              value={authFormData.displayName}
-              onChange={nameChangeHandler}
-              classes="mb-4"
               disabled={isSigningIn || isSigningUp}
               placeholder="John Doe"
+              classes="mb-4"
+              register={register}
             />
           )}
-          <Input
+          <FormInput
             id="password"
+            name="password"
             type="password"
             label="Password"
             required={true}
-            value={authFormData.password}
-            onChange={passwordChangeHandler}
-            classes="mb-6"
             disabled={isSigningIn || isSigningUp}
             placeholder="••••••••"
+            classes="mb-6"
+            register={register}
           />
           <Button
             category="primary"
