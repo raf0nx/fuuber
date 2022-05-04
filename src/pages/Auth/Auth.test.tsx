@@ -44,12 +44,12 @@ const server = setupServer(
   })
 )
 
-const mockedUsedNavigate = jest.fn()
+const mockedUseNavigate = jest.fn()
 
 // Mock React Router
 jest.mock('react-router-dom', () => ({
   ...(jest.requireActual('react-router-dom') as any),
-  useNavigate: () => mockedUsedNavigate,
+  useNavigate: () => mockedUseNavigate,
 }))
 
 describe('<Auth />', () => {
@@ -111,8 +111,8 @@ describe('<Auth />', () => {
     userEvent.click(signInButton)
 
     // Then
-    expect(screen.getByText(/please wait.../i)).toBeInTheDocument()
-    await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalled())
+    await screen.findByText(/please wait.../i)
+    await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalled())
   })
 
   test('should sign up a user in register mode', async () => {
@@ -134,11 +134,11 @@ describe('<Auth />', () => {
     userEvent.click(signUpButton)
 
     // Then
-    expect(screen.getByText(/please wait.../i)).toBeInTheDocument()
-    await waitFor(() => expect(mockedUsedNavigate).toHaveBeenCalled())
+    expect(await screen.findByText(/please wait.../i)).toBeInTheDocument()
+    await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalled())
   })
 
-  test('should catch an error while authenticating', () => {
+  test('should catch an error while authenticating', async () => {
     // Given
     customRender(<Auth />)
 
@@ -160,5 +160,6 @@ describe('<Auth />', () => {
 
     // Then
     // TODO: TBD when validation and UI is implemented
+    await waitFor(() => expect(true).toBe(true))
   })
 })
