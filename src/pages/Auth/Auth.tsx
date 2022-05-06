@@ -17,7 +17,11 @@ import authBackground from '../../assets/auth-background.webp'
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
-  const { register, handleSubmit } = useForm<AuthFormData>()
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthFormData>()
 
   const dispatch = useAppDispatch()
 
@@ -101,6 +105,10 @@ const Auth: React.FC = () => {
             placeholder="eat@food.com"
             classes="mb-4"
             register={register}
+            rules={{
+              required: 'Email field is required',
+            }}
+            errors={errors}
           />
           {!isLogin && (
             <FormInput
@@ -113,6 +121,10 @@ const Auth: React.FC = () => {
               placeholder="John Doe"
               classes="mb-4"
               register={register}
+              rules={{
+                required: 'Name field is required',
+              }}
+              errors={errors}
             />
           )}
           <FormInput
@@ -125,13 +137,19 @@ const Auth: React.FC = () => {
             placeholder="••••••••"
             classes="mb-6"
             register={register}
+            rules={{
+              required: 'Password field is required',
+            }}
+            errors={errors}
           />
           <Button
             category="primary"
             type="submit"
             name="Submit Button"
             classes="w-full flex justify-center items-center"
-            disabled={isSigningIn || isSigningUp}
+            disabled={
+              isSigningIn || isSigningUp || !!Object.keys(errors).length
+            }
           >
             {submitButtonContent()}
           </Button>
