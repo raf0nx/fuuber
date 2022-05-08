@@ -12,7 +12,7 @@ const BASE_AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts/'
 const testUserData = {
   email: 'test@email.com',
   displayName: 'Name',
-  password: 'Password',
+  password: 'Password1',
 }
 
 const server = setupServer(
