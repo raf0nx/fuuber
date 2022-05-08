@@ -1,6 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useForm } from 'react-hook-form'
+import { yupResolver } from '@hookform/resolvers/yup'
+import * as yup from 'yup'
 
 import Card from '../../components/UI/Card/Card'
 import FormInput from '../../components/UI/Input/FormInput'
@@ -17,11 +19,36 @@ import authBackground from '../../assets/auth-background.webp'
 
 const Auth: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
+
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<AuthFormData>()
+    clearErrors,
+  } = useForm<AuthFormData>({
+    resolver: yupResolver(
+      yup
+        .object({
+          email: yup
+            .string()
+            .required('Email is required')
+            .email('Email must be a valid email address'),
+          displayName: isLogin
+            ? yup.string()
+            : yup.string().required('Name is required').trim(),
+          password: isLogin
+            ? yup.string().required('Password is required')
+            : yup
+                .string()
+                .required('Password is required')
+                .matches(
+                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
+                  'Password needs to have min 8 characters, at least one uppercase and lowercase letter and one number'
+                ),
+        })
+        .required()
+    ),
+  })
 
   const dispatch = useAppDispatch()
 
@@ -31,6 +58,7 @@ const Auth: React.FC = () => {
   const navigate = useNavigate()
 
   const switchAuthModeHandler = () => {
+    clearErrors()
     !isSigningIn && !isSigningUp && setIsLogin(prevMode => !prevMode)
   }
 
@@ -105,9 +133,6 @@ const Auth: React.FC = () => {
             placeholder="eat@food.com"
             classes="mb-4"
             register={register}
-            rules={{
-              required: 'Email field is required',
-            }}
             errors={errors}
           />
           {!isLogin && (
@@ -121,9 +146,6 @@ const Auth: React.FC = () => {
               placeholder="John Doe"
               classes="mb-4"
               register={register}
-              rules={{
-                required: 'Name field is required',
-              }}
               errors={errors}
             />
           )}
@@ -137,9 +159,6 @@ const Auth: React.FC = () => {
             placeholder="••••••••"
             classes="mb-6"
             register={register}
-            rules={{
-              required: 'Password field is required',
-            }}
             errors={errors}
           />
           <Button
