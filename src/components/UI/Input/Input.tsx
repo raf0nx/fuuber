@@ -1,4 +1,5 @@
 import React from 'react'
+import classNames from 'classnames'
 
 export interface InputProps {
   id: string
@@ -30,14 +31,11 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     },
     ref
   ) => {
-    let styles =
-      'bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:border-opacity-0 block w-full p-2.5 transition duration-200'
-
-    if (disabled) {
-      styles = styles.concat(
-        ' cursor-not-allowed opacity-50 hover:border-opacity-50'
-      )
-    }
+    const inputStyles = classNames(
+      'bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:border-opacity-0 block w-full p-2.5 transition duration-200',
+      classes,
+      { 'cursor-not-allowed opacity-50 hover:border-opacity-50': disabled }
+    )
 
     return (
       <>
@@ -56,7 +54,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
           required={required}
           disabled={disabled}
           placeholder={placeholder}
-          className={`${styles} ${classes}`}
+          className={inputStyles}
           {...props}
         />
       </>
