@@ -1,8 +1,8 @@
-import AuthForm from '../../components/AuthForm/AuthForm'
+import AuthForm from '../../components/AuthForm'
 
 import authBackground from '../../assets/auth-background.webp'
 
-const Auth: React.FC = () => {
+export const Auth: React.FC = () => {
   return (
     <section className="w-full h-full flex justify-evenly items-center">
       <img
@@ -15,5 +15,3 @@ const Auth: React.FC = () => {
     </section>
   )
 }
-
-export default Auth

@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom'
 
-import Button from '../../components/UI/Button/Button'
+import Button from '../../components/UI/Button'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks'
 import { logout } from '../../store/slices/auth'
 
-const Home: React.FC = () => {
+export const Home: React.FC = () => {
   const { user } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
 
@@ -26,5 +26,3 @@ const Home: React.FC = () => {
     </>
   )
 }
-
-export default Home

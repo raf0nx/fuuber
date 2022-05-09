@@ -15,7 +15,7 @@ export interface InputProps {
   classes?: string
 }
 
-const Input = React.forwardRef<HTMLInputElement, InputProps>(
+export const Input = React.forwardRef<HTMLInputElement, InputProps>(
   (
     {
       id,
@@ -66,4 +66,3 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     )
   }
 )
-export default Input

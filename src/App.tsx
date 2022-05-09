@@ -1,7 +1,7 @@
 import { Navigate, Route, Routes } from 'react-router-dom'
 
-import Auth from './pages/Auth/Auth'
-import Home from './pages/Home/Home'
+import Home from './pages/Home'
+import Auth from './pages/Auth'
 
 import { useAppSelector } from './hooks/store-hooks'
 import { usePersistAuthOnReload } from './hooks/persist-auth-on-reload'

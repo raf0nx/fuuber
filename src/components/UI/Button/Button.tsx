@@ -9,7 +9,7 @@ interface ButtonProps {
   onClick?: () => void
 }
 
-const Button: React.FC<ButtonProps> = ({
+export const Button: React.FC<ButtonProps> = ({
   children,
   category,
   type = 'button',
@@ -48,5 +48,3 @@ const Button: React.FC<ButtonProps> = ({
     </button>
   )
 }
-
-export default Button

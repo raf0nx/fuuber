@@ -6,7 +6,7 @@ interface CardProps {
   actionsClasses?: string
 }
 
-const Card: React.FC<CardProps> = ({
+export const Card: React.FC<CardProps> = ({
   children,
   title,
   classes = '',
@@ -25,5 +25,3 @@ const Card: React.FC<CardProps> = ({
     </div>
   )
 }
-
-export default Card

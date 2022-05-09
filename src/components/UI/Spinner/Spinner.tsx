@@ -3,7 +3,7 @@ interface SpinnerProps {
   classes?: string
 }
 
-const Spinner: React.FC<SpinnerProps> = ({
+export const Spinner: React.FC<SpinnerProps> = ({
   children,
   textPosition = 'right',
   classes = '',
@@ -30,5 +30,3 @@ const Spinner: React.FC<SpinnerProps> = ({
     </>
   )
 }
-
-export default Spinner

@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import classNames from 'classnames'
 
-import FormInput from '../UI/Input/FormInput'
-import Spinner from '../UI/Spinner/Spinner'
-import Card from '../UI/Card/Card'
-import Button from '../UI/Button/Button'
+import FormInput from '../UI/FormInput'
+import Spinner from '../UI/Spinner'
+import Card from '../UI/Card'
+import Button from '../UI/Button'
 
 import { useAppDispatch } from '../../hooks/store-hooks'
 import { useSignInMutation, useSignUpMutation } from '../../api/auth'
@@ -16,7 +16,7 @@ import { authFormValidationSchema } from './validation-schema'
 
 import { AuthFormData } from '../../types/auth'
 
-const AuthForm: React.FC = () => {
+export const AuthForm: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
   const dispatch = useAppDispatch()
 
@@ -143,5 +143,3 @@ const AuthForm: React.FC = () => {
     </Card>
   )
 }
-
-export default AuthForm

@@ -9,7 +9,7 @@ import {
 } from 'react-hook-form'
 import classNames from 'classnames'
 
-import Input, { InputProps } from './Input'
+import Input, { InputProps } from '../Input'
 
 type FormInputProps<TFormValues> = {
   name: Path<TFormValues>
@@ -19,7 +19,7 @@ type FormInputProps<TFormValues> = {
   classes?: string
 } & Omit<InputProps, 'name'>
 
-const FormInput = <TFormValues extends Record<string, unknown>>({
+export const FormInput = <TFormValues extends Record<string, unknown>>({
   name,
   register,
   rules,
@@ -49,5 +49,3 @@ const FormInput = <TFormValues extends Record<string, unknown>>({
     </div>
   )
 }
-
-export default FormInput

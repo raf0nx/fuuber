@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import AuthForm from './AuthForm'
+import AuthForm from '.'
 
 import { customRender } from '../../utils/test-utils'
 
