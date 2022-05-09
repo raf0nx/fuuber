@@ -31,19 +31,19 @@ const Auth: React.FC = () => {
         .object({
           email: yup
             .string()
-            .required('Email is required')
-            .email('Email must be a valid email address'),
+            .required('Email is required.')
+            .email('Email must be a valid email address.'),
           displayName: isLogin
             ? yup.string()
-            : yup.string().required('Name is required').trim(),
+            : yup.string().required('Name is required.').trim(),
           password: isLogin
-            ? yup.string().required('Password is required')
+            ? yup.string().required('Password is required.')
             : yup
                 .string()
-                .required('Password is required')
+                .required('Password is required.')
                 .matches(
                   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/,
-                  'Password needs to have min 8 characters, at least one uppercase and lowercase letter and one number'
+                  'Password needs to have at least 8 characters, one uppercase and lowercase letter and one number.'
                 ),
         })
         .required()
@@ -131,7 +131,6 @@ const Auth: React.FC = () => {
             required={true}
             disabled={isSigningIn || isSigningUp}
             placeholder="eat@food.com"
-            classes="mb-4"
             register={register}
             errors={errors}
           />
@@ -144,7 +143,6 @@ const Auth: React.FC = () => {
               required={true}
               disabled={isSigningIn || isSigningUp}
               placeholder="John Doe"
-              classes="mb-4"
               register={register}
               errors={errors}
             />
@@ -157,7 +155,7 @@ const Auth: React.FC = () => {
             required={true}
             disabled={isSigningIn || isSigningUp}
             placeholder="••••••••"
-            classes="mb-6"
+            classes="mb-4"
             register={register}
             errors={errors}
           />

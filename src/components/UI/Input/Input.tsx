@@ -5,6 +5,7 @@ export interface InputProps {
   name: string
   type: string
   label: string
+  labelClasses?: string
   required?: boolean
   disabled?: boolean
   formId?: string
@@ -19,6 +20,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       name,
       type,
       label,
+      labelClasses = '',
       required,
       disabled,
       formId,
@@ -40,7 +42,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     return (
       <>
         <label
-          className="inline-block mb-2 text-sm font-medium text-gray-900"
+          className={`inline-block mb-2 text-sm font-medium text-gray-900 transition-colors duration-200 ${labelClasses}`}
           htmlFor={id}
         >
           {label}
