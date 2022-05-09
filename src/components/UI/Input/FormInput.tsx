@@ -34,10 +34,7 @@ const FormInput = <TFormValues extends Record<string, unknown>>({
     <div className={classes}>
       <Input
         name={name}
-        classes={classNames({
-          'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500':
-            hasError,
-        })}
+        hasError={hasError}
         labelClasses={classNames({ 'text-red-700': hasError })}
         {...props}
         {...(register && register(name, rules))}

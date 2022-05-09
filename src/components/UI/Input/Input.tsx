@@ -9,6 +9,7 @@ export interface InputProps {
   labelClasses?: string
   required?: boolean
   disabled?: boolean
+  hasError?: boolean
   formId?: string
   placeholder?: string
   classes?: string
@@ -24,6 +25,7 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
       labelClasses = '',
       required,
       disabled,
+      hasError,
       formId,
       placeholder,
       classes = '',
@@ -32,7 +34,10 @@ const Input = React.forwardRef<HTMLInputElement, InputProps>(
     ref
   ) => {
     const inputStyles = classNames(
-      'bg-gray-50 border shadow-sm border-gray-300 border-opacity-50 text-gray-900 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-indigo-500 focus:ring-2 focus:border-opacity-0 block w-full p-2.5 transition duration-200',
+      'border shadow-sm border-opacity-50 text-sm rounded-lg hover:border-opacity-100 focus:outline-none focus:ring-2 focus:border-opacity-0 block w-full p-2.5 transition duration-200',
+      hasError
+        ? 'bg-red-50 border-red-500 text-red-900 placeholder-red-700 focus:ring-red-500'
+        : 'bg-gray-50 border-gray-300 text-gray-900 focus:ring-indigo-500',
       classes,
       { 'cursor-not-allowed opacity-50 hover:border-opacity-50': disabled }
     )
