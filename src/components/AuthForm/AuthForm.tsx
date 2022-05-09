@@ -11,7 +11,7 @@ import Button from '../UI/Button/Button'
 
 import { useAppDispatch } from '../../hooks/store-hooks'
 import { useSignInMutation, useSignUpMutation } from '../../api/auth'
-import { setTokenData, setUser } from '../../store/auth'
+import { setTokenData, setUser } from '../../store/slices/auth'
 import { authFormValidationSchema } from './validation-schema'
 
 import { AuthFormData } from '../../types/auth'

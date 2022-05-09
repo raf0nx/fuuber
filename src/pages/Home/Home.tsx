@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import Button from '../../components/UI/Button/Button'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks'
-import { logout } from '../../store/auth'
+import { logout } from '../../store/slices/auth'
 
 const Home: React.FC = () => {
   const { user } = useAppSelector(state => state.auth)
