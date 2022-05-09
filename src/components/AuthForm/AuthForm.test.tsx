@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 
-import Auth from './Auth'
+import AuthForm from './AuthForm'
 
 import { customRender } from '../../utils/test-utils'
 
@@ -52,7 +52,7 @@ jest.mock('react-router-dom', () => ({
   useNavigate: () => mockedUseNavigate,
 }))
 
-describe('<Auth />', () => {
+describe('<AuthForm />', () => {
   beforeAll(() => server.listen())
 
   afterEach(() => server.resetHandlers())
@@ -61,7 +61,7 @@ describe('<Auth />', () => {
 
   test('should change auth mode', () => {
     // Given
-    customRender(<Auth />)
+    customRender(<AuthForm />)
     expect(screen.getByText(/really hungry?/i)).toBeInTheDocument()
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
@@ -75,7 +75,7 @@ describe('<Auth />', () => {
 
   test('should update email, name and password', () => {
     // Given
-    customRender(<Auth />)
+    customRender(<AuthForm />)
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
@@ -99,7 +99,7 @@ describe('<Auth />', () => {
 
   test('should sign in user in login mode', async () => {
     // Given
-    customRender(<Auth />)
+    customRender(<AuthForm />)
 
     const emailInput = screen.getByLabelText(/e-mail address/i)
     const passwordInput = screen.getByLabelText(/password/i)
@@ -117,7 +117,7 @@ describe('<Auth />', () => {
 
   test('should sign up a user in register mode', async () => {
     // Given
-    customRender(<Auth />)
+    customRender(<AuthForm />)
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
@@ -140,7 +140,7 @@ describe('<Auth />', () => {
 
   test('should catch an error while authenticating', async () => {
     // Given
-    customRender(<Auth />)
+    customRender(<AuthForm />)
 
     server.use(
       rest.post(
