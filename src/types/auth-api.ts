@@ -15,3 +15,7 @@ export interface TransformedAuthResponse {
   userData: User
   tokenData: TokenData
 }
+
+export interface ErrorResponse {
+  data: { error: { message: string; code: number }; status: number }
+}

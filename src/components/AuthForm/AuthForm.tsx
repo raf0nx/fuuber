@@ -8,6 +8,7 @@ import FormInput from '../UI/FormInput'
 import Spinner from '../UI/Spinner'
 import Card from '../UI/Card'
 import Button from '../UI/Button'
+import Alert from '../UI/Alert'
 
 import { useAppDispatch } from '../../hooks/store-hooks'
 import { useSignInMutation, useSignUpMutation } from '../../api/auth'
@@ -15,9 +16,12 @@ import { setTokenData, setUser } from '../../store/slices/auth'
 import { authFormValidationSchema } from './validation-schema'
 
 import { AuthFormData } from '../../types/auth'
+import { ErrorResponse } from '../../types/auth-api'
 
 export const AuthForm: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)
+  const [isAlertVisible, setIsAlertVisible] = useState(false)
+  const [alertMessage, setAlertMessage] = useState('')
   const dispatch = useAppDispatch()
 
   const {
@@ -36,7 +40,13 @@ export const AuthForm: React.FC = () => {
 
   const switchAuthModeHandler = () => {
     clearErrors()
+    setIsAlertVisible(false)
+    setAlertMessage('')
     !isSigningIn && !isSigningUp && setIsLogin(prevMode => !prevMode)
+  }
+
+  const dismissAlertHandler = () => {
+    setIsAlertVisible(false)
   }
 
   const submitHandler = async (data: AuthFormData) => {
@@ -49,7 +59,12 @@ export const AuthForm: React.FC = () => {
       dispatch(setTokenData(tokenData))
 
       navigate('/', { replace: true })
-    } catch (error) {}
+    } catch (error) {
+      const { data } = error as ErrorResponse
+
+      setIsAlertVisible(true)
+      setAlertMessage(data.error.message)
+    }
   }
 
   const getAuthModeTitle = () =>
@@ -94,6 +109,14 @@ export const AuthForm: React.FC = () => {
       actionsClasses="flex justify-center"
     >
       <form onSubmit={handleSubmit(submitHandler)}>
+        {isAlertVisible && (
+          <Alert
+            type="danger"
+            message={alertMessage}
+            dismissable={true}
+            onDismissAlert={dismissAlertHandler}
+          />
+        )}
         <FormInput
           id="email"
           name="email"

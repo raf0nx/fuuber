@@ -138,7 +138,7 @@ describe('<AuthForm />', () => {
     await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalled())
   })
 
-  test('should catch an error while authenticating', async () => {
+  test('should catch a server side error, display error message in the alert and dismiss the alert', async () => {
     // Given
     customRender(<AuthForm />)
 
@@ -146,20 +146,34 @@ describe('<AuthForm />', () => {
       rest.post(
         'https://identitytoolkit.googleapis.com/v1/accounts/:signInWithPassword',
         (_, res, ctx) => {
-          return res(ctx.status(401))
+          return res(
+            ctx.status(400),
+            ctx.json({
+              error: {
+                message: 'Invalid password',
+                code: 400,
+              },
+            })
+          )
         }
       )
     )
 
     const emailInput = screen.getByLabelText(/e-mail address/i)
+    const passwordInput = screen.getByLabelText(/password/i)
     const signInButton = screen.getByText(/sign in/i)
 
     // When
     userEvent.type(emailInput, testUserData.email)
+    userEvent.type(passwordInput, testUserData.password)
     userEvent.click(signInButton)
 
     // Then
-    // TODO: TBD when validation and UI is implemented
-    await waitFor(() => expect(true).toBe(true))
+    expect(await screen.findByText(/invalid password/i)).toBeInTheDocument()
+
+    const closeAlertBtn = screen.getByRole('button', { name: 'Close' })
+    userEvent.click(closeAlertBtn)
+
+    expect(screen.queryByText(/invalid password/i)).not.toBeInTheDocument()
   })
 })
