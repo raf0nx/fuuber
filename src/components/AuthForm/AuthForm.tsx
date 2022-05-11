@@ -14,6 +14,7 @@ import { useAppDispatch } from '../../hooks/store-hooks'
 import { useSignInMutation, useSignUpMutation } from '../../api/auth'
 import { setTokenData, setUser } from '../../store/slices/auth'
 import { authFormValidationSchema } from './validation-schema'
+import { capitalize, snakeCaseToSentenceCase } from '../../utils/string-utils'
 
 import { AuthFormData } from '../../types/auth'
 import { ErrorResponse } from '../../types/auth-api'
@@ -63,7 +64,9 @@ export const AuthForm: React.FC = () => {
       const { data } = error as ErrorResponse
 
       setIsAlertVisible(true)
-      setAlertMessage(data.error.message)
+      setAlertMessage(
+        capitalize(snakeCaseToSentenceCase(data.error.message.toLowerCase()))
+      )
     }
   }
 
