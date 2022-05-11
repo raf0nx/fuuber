@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
-import { firebaseConfig } from '../utils/config'
+import { firebaseConfig } from '../config/config'
 
 import { AuthResponse, TransformedAuthResponse } from '../types/auth-api'
 import { AuthFormData, User } from '../types/auth'

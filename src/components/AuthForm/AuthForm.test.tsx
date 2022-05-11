@@ -5,7 +5,7 @@ import { setupServer } from 'msw/node'
 
 import AuthForm from '.'
 
-import { customRender } from '../../utils/test-utils'
+import { customRender } from '../../utils/test/CustomRender'
 
 const BASE_AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts/'
 

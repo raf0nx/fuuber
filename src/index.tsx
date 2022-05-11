@@ -8,7 +8,7 @@ import App from './App'
 
 import { store } from './store/store'
 import reportWebVitals from './reportWebVitals'
-import { firebaseConfig } from './utils/config'
+import { firebaseConfig } from './config/config'
 
 import './index.css'
 
