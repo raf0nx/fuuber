@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -95,6 +95,10 @@ export const AuthForm: React.FC = () => {
           { 'cursor-not-allowed text-indigo-300': isSigningIn || isSigningUp }
         )}
         onClick={switchAuthModeHandler}
+        onKeyDown={(event: React.KeyboardEvent) =>
+          (event.code === 'Enter' || event.code === 'Space') &&
+          switchAuthModeHandler()
+        }
         tabIndex={0}
         role="button"
       >
