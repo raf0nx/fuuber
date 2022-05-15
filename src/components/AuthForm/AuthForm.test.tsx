@@ -63,10 +63,13 @@ describe('<AuthForm />', () => {
     // Given
     customRender(<AuthForm />)
     expect(screen.getByText(/really hungry?/i)).toBeInTheDocument()
-    const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
-    userEvent.click(changeAuthModeBtn)
+    userEvent.tab()
+    userEvent.tab()
+    userEvent.tab()
+    userEvent.tab()
+    userEvent.keyboard('[space]')
 
     // Then
     expect(screen.queryByText(/really hungry?/i)).not.toBeInTheDocument()
