@@ -8,6 +8,7 @@ import {
   get,
 } from 'react-hook-form'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 import Input, { InputProps } from '../Input'
 
@@ -39,13 +40,19 @@ export const FormInput = <TFormValues extends Record<string, unknown>>({
         {...props}
         {...(register && register(name, rules))}
       />
-      <p className="my-1 text-xs text-red-600 min-h-4">
-        <ErrorMessage
-          errors={errors}
-          name={name as any}
-          render={({ message }) => <span>{message}</span>}
-        />
-      </p>
+      <CSSTransition
+        in={hasError}
+        timeout={1200}
+        classNames={{ enterActive: 'animate-shake' }}
+      >
+        <p className="my-1 text-xs text-red-600 min-h-4">
+          <ErrorMessage
+            errors={errors}
+            name={name as any}
+            render={({ message }) => <span>{message}</span>}
+          />
+        </p>
+      </CSSTransition>
     </div>
   )
 }
