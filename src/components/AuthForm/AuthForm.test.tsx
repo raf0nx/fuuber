@@ -177,6 +177,8 @@ describe('<AuthForm />', () => {
     const closeAlertBtn = screen.getByRole('button', { name: 'Close' })
     userEvent.click(closeAlertBtn)
 
-    expect(screen.queryByText(/invalid password/i)).not.toBeInTheDocument()
+    await waitFor(() =>
+      expect(screen.queryByText(/invalid password/i)).not.toBeInTheDocument()
+    )
   })
 })
