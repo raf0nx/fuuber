@@ -17,9 +17,24 @@ module.exports = {
           '95%': { transform: 'translateX(-5px)' },
           '100%': { transform: 'translateX(0)' },
         },
+        'fade-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
+        },
+        'slide-in': {
+          '0%': { transform: 'skewX(53deg) translateX(-500px)', opacity: '0' },
+          '60%': { transform: 'translateX(0px)' },
+          '62%': { transform: 'skewX(0deg) translateX(30px)' },
+          '70%': { transform: 'skewX(-20deg)', opacity: '1' },
+          '80%': { transform: 'skewX(0deg) translate(0)' },
+          '90%': { transform: 'skewX(-5deg)' },
+          '100%': { transform: 'skewX(0deg)' },
+        },
       },
       animation: {
         shake: 'shake 1.2s ease-in-out',
+        'fade-out': 'fade-out .3s linear',
+        'slide-in': 'slide-in .7s ease-in',
       },
       width: {
         128: '32rem',

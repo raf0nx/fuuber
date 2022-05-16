@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 import FormInput from '../UI/FormInput'
 import Spinner from '../UI/Spinner'
@@ -115,15 +116,28 @@ export const AuthForm: React.FC = () => {
       actions={authPageAction}
       actionsClasses="flex justify-center"
     >
-      <form onSubmit={handleSubmit(submitHandler)}>
-        {isAlertVisible && (
+      <form onSubmit={handleSubmit(submitHandler)} className="relative mt-11">
+        <CSSTransition
+          in={isAlertVisible}
+          timeout={{
+            enter: 700,
+            exit: 280,
+          }}
+          mountOnEnter
+          unmountOnExit
+          classNames={{
+            enterActive: 'animate-slide-in',
+            exitActive: 'animate-fade-out',
+          }}
+        >
           <Alert
             type="danger"
             message={alertMessage}
             dismissable={true}
             onDismissAlert={dismissAlertHandler}
+            classes="absolute w-full -top-16"
           />
-        )}
+        </CSSTransition>
         <FormInput
           id="email"
           name="email"
