@@ -43,7 +43,6 @@ export const AuthForm: React.FC = () => {
   const switchAuthModeHandler = () => {
     clearErrors()
     setIsAlertVisible(false)
-    setAlertMessage('')
     !isSigningIn && !isSigningUp && setIsLogin(prevMode => !prevMode)
   }
 
