@@ -44,12 +44,14 @@ const server = setupServer(
   })
 )
 
-const mockedUseNavigate = jest.fn()
+const mockedUseHistory = jest.fn()
 
 // Mock React Router
 jest.mock('react-router-dom', () => ({
   ...(jest.requireActual('react-router-dom') as any),
-  useNavigate: () => mockedUseNavigate,
+  useHistory: () => ({
+    replace: mockedUseHistory,
+  }),
 }))
 
 describe('<AuthForm />', () => {
@@ -115,7 +117,7 @@ describe('<AuthForm />', () => {
 
     // Then
     await screen.findByText(/please wait.../i)
-    await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalled())
+    await waitFor(() => expect(mockedUseHistory).toHaveBeenCalled())
   })
 
   test('should sign up a user in register mode', async () => {
@@ -138,7 +140,7 @@ describe('<AuthForm />', () => {
 
     // Then
     expect(await screen.findByText(/please wait.../i)).toBeInTheDocument()
-    await waitFor(() => expect(mockedUseNavigate).toHaveBeenCalled())
+    await waitFor(() => expect(mockedUseHistory).toHaveBeenCalled())
   })
 
   test('should catch a server side error, display error message in the alert and dismiss the alert', async () => {

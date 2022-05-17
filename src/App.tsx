@@ -1,4 +1,4 @@
-import { Navigate, Route, Routes } from 'react-router-dom'
+import { Redirect, Route, Switch } from 'react-router-dom'
 
 import Home from './pages/Home'
 import Auth from './pages/Auth'
@@ -13,16 +13,14 @@ const App: React.FC = () => {
 
   return (
     <main id="app" className="h-screen w-screen">
-      <Routes>
-        <Route
-          path="/"
-          element={isLoggedIn ? <Home /> : <Navigate to="/auth" />}
-        />
-        <Route
-          path="/auth"
-          element={isLoggedIn ? <Navigate to="/" /> : <Auth />}
-        />
-      </Routes>
+      <Switch>
+        <Route path="/" exact>
+          {isLoggedIn ? <Home /> : <Redirect to="/auth" />}
+        </Route>
+        <Route path="/auth">
+          {isLoggedIn ? <Redirect to="/" /> : <Auth />}
+        </Route>
+      </Switch>
     </main>
   )
 }

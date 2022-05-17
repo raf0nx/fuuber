@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form'
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { yupResolver } from '@hookform/resolvers/yup'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
@@ -38,7 +38,7 @@ export const AuthForm: React.FC = () => {
   const [signIn, { isLoading: isSigningIn }] = useSignInMutation()
   const [signUp, { isLoading: isSigningUp }] = useSignUpMutation()
 
-  const navigate = useNavigate()
+  const history = useHistory()
 
   const switchAuthModeHandler = () => {
     clearErrors()
@@ -59,7 +59,7 @@ export const AuthForm: React.FC = () => {
       dispatch(setUser(userData))
       dispatch(setTokenData(tokenData))
 
-      navigate('/', { replace: true })
+      history.replace('/')
     } catch (error) {
       const { data } = error as ErrorResponse
 

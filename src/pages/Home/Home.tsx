@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 import Button from '../../components/UI/Button'
 
@@ -9,11 +9,11 @@ export const Home: React.FC = () => {
   const { user } = useAppSelector(state => state.auth)
   const dispatch = useAppDispatch()
 
-  const navigate = useNavigate()
+  const history = useHistory()
 
   const logoutHandler = () => {
     dispatch(logout())
-    navigate('/auth', { replace: true })
+    history.replace('/auth')
   }
 
   return (
