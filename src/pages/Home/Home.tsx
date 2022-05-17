@@ -17,12 +17,12 @@ export const Home: React.FC = () => {
   }
 
   return (
-    <>
+    <section>
       <div>Welcome home!</div>
       <div>{user?.displayName}</div>
       <Button category="primary" onClick={logoutHandler}>
         Logout
       </Button>
-    </>
+    </section>
   )
 }
