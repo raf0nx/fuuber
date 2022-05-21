@@ -61,30 +61,30 @@ describe('<AuthForm />', () => {
 
   afterAll(() => server.close())
 
-  test('should change auth mode', () => {
+  test('should change auth mode', async () => {
     // Given
     customRender(<AuthForm />)
     expect(screen.getByText(/really hungry?/i)).toBeInTheDocument()
 
     // When
-    userEvent.tab()
-    userEvent.tab()
-    userEvent.tab()
-    userEvent.tab()
-    userEvent.keyboard('[space]')
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.tab()
+    await userEvent.keyboard('[space]')
 
     // Then
     expect(screen.queryByText(/really hungry?/i)).not.toBeInTheDocument()
     expect(screen.getByText(/create a new account/i)).toBeInTheDocument()
   })
 
-  test('should update email, name and password', () => {
+  test('should update email, name and password', async () => {
     // Given
     customRender(<AuthForm />)
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
-    userEvent.click(changeAuthModeBtn)
+    await userEvent.click(changeAuthModeBtn)
 
     const emailInput = screen.getByLabelText(
       /e-mail address/i
@@ -92,9 +92,9 @@ describe('<AuthForm />', () => {
     const nameInput = screen.getByLabelText(/name/i) as HTMLInputElement
     const passwordInput = screen.getByLabelText(/password/i) as HTMLInputElement
 
-    userEvent.type(emailInput, testUserData.email)
-    userEvent.type(nameInput, testUserData.displayName)
-    userEvent.type(passwordInput, testUserData.password)
+    await userEvent.type(emailInput, testUserData.email)
+    await userEvent.type(nameInput, testUserData.displayName)
+    await userEvent.type(passwordInput, testUserData.password)
 
     // Then
     expect(emailInput.value).toBe(testUserData.email)
@@ -111,9 +111,9 @@ describe('<AuthForm />', () => {
     const signInButton = screen.getByText(/sign in/i)
 
     // When
-    userEvent.type(emailInput, testUserData.email)
-    userEvent.type(passwordInput, testUserData.password)
-    userEvent.click(signInButton)
+    await userEvent.type(emailInput, testUserData.email)
+    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.click(signInButton)
 
     // Then
     await screen.findByText(/please wait.../i)
@@ -126,17 +126,17 @@ describe('<AuthForm />', () => {
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
-    userEvent.click(changeAuthModeBtn)
+    await userEvent.click(changeAuthModeBtn)
 
     const emailInput = screen.getByLabelText(/e-mail address/i)
     const nameInput = screen.getByLabelText(/name/i)
     const passwordInput = screen.getByLabelText(/password/i)
     const signUpButton = screen.getByText(/create account/i)
 
-    userEvent.type(emailInput, testUserData.email)
-    userEvent.type(nameInput, testUserData.displayName)
-    userEvent.type(passwordInput, testUserData.password)
-    userEvent.click(signUpButton)
+    await userEvent.type(emailInput, testUserData.email)
+    await userEvent.type(nameInput, testUserData.displayName)
+    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.click(signUpButton)
 
     // Then
     expect(await screen.findByText(/please wait.../i)).toBeInTheDocument()
@@ -169,15 +169,15 @@ describe('<AuthForm />', () => {
     const signInButton = screen.getByText(/sign in/i)
 
     // When
-    userEvent.type(emailInput, testUserData.email)
-    userEvent.type(passwordInput, testUserData.password)
-    userEvent.click(signInButton)
+    await userEvent.type(emailInput, testUserData.email)
+    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.click(signInButton)
 
     // Then
     expect(await screen.findByText(/invalid password/i)).toBeInTheDocument()
 
     const closeAlertBtn = screen.getByRole('button', { name: 'Close' })
-    userEvent.click(closeAlertBtn)
+    await userEvent.click(closeAlertBtn)
 
     await waitFor(() =>
       expect(screen.queryByText(/invalid password/i)).not.toBeInTheDocument()
