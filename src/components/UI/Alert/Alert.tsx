@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import classNames from 'classnames'
 
 import { ReactComponent as InfoIcon } from '../../../assets/icons/info.svg'
@@ -6,6 +7,7 @@ import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg'
 interface AlertProps {
   message: string
   type: 'success' | 'info' | 'warning' | 'danger'
+  timeout?: number
   classes?: string
   dismissable?: boolean
   onDismissAlert?: () => void
@@ -14,6 +16,7 @@ interface AlertProps {
 export const Alert: React.FC<AlertProps> = ({
   message,
   type,
+  timeout = 5000,
   classes = '',
   dismissable = false,
   onDismissAlert,
@@ -46,6 +49,19 @@ export const Alert: React.FC<AlertProps> = ({
         type === 'danger',
     }
   )
+
+  useEffect(() => {
+    if (onDismissAlert) {
+      const dismissTimeout = setTimeout(() => {
+        onDismissAlert()
+      }, timeout)
+
+      return () => {
+        clearTimeout(dismissTimeout)
+      }
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
 
   return (
     <div className={alertStyles} role="alert">
