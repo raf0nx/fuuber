@@ -15,7 +15,9 @@ export const Card: React.FC<CardProps> = ({
   actionsClasses = '',
 }) => {
   return (
-    <div className={`bg-white p-6 rounded shadow-md shadow-white ${classes}`}>
+    <div
+      className={`bg-white p-6 rounded-lg border border-gray-200 shadow-md ${classes}`}
+    >
       <h1 className="text-2xl antialiased font-bold text-gray-900 mb-2">
         {title}
       </h1>

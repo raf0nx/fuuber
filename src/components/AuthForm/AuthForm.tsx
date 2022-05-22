@@ -110,7 +110,7 @@ export const AuthForm: React.FC = () => {
   return (
     <Card
       title={getAuthModeTitle()}
-      classes="w-128"
+      classes="w-128 shadow-slate-400"
       subtitle={getAuthModeSubtitle()}
       actions={authPageAction}
       actionsClasses="flex justify-center"
