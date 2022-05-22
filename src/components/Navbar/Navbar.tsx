@@ -1,10 +1,16 @@
 import { NavLink } from 'react-router-dom'
 
+import { FaHamburger } from 'react-icons/fa'
+
 export const Navbar = () => {
   return (
     <nav className="bg-indigo-500 text-white p-4 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
-      <NavLink to="/" exact className="font-bold text-xl">
-        React Food
+      <NavLink
+        to="/"
+        exact
+        className="font-bold text-xl flex items-center gap-2"
+      >
+        <FaHamburger /> React Food
       </NavLink>
       <ul className="flex gap-4 font-medium">
         <NavLink
