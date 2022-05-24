@@ -1,8 +1,13 @@
 import { NavLink } from 'react-router-dom'
-
 import { FaHamburger } from 'react-icons/fa'
 
-export const Navbar = () => {
+import Avatar from '../Avatar'
+
+import { useAppSelector } from '../../hooks/store-hooks'
+
+export const Navbar: React.FC = () => {
+  const photoUrl = useAppSelector(state => state.auth.user?.photoUrl)
+
   return (
     <nav className="bg-indigo-500 text-white p-4 mb-1 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
       <NavLink
@@ -12,7 +17,7 @@ export const Navbar = () => {
       >
         <FaHamburger /> React Food
       </NavLink>
-      <ul className="flex gap-4 font-medium">
+      <ul className="flex gap-4 font-semibold">
         <NavLink
           to="/home"
           exact
@@ -37,16 +42,8 @@ export const Navbar = () => {
         >
           Orders
         </NavLink>
-        <NavLink
-          to="/profile"
-          exact
-          className="hover:text-indigo-900 transition-colors"
-          activeClassName="text-indigo-900"
-        >
-          Profile
-        </NavLink>
-        <li>Logout</li>
       </ul>
+      <Avatar imageUrl={photoUrl} />
     </nav>
   )
 }
