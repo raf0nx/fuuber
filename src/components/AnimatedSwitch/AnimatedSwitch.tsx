@@ -17,7 +17,7 @@ export const AnimatedSwitch: React.FC<AnimatedSwitchProps> = ({
       classNames={{
         enter: 'transition-transform duration-500 ease-out translate-x-full',
         enterActive: 'translate-x-0',
-        exit: 'transition-transform duration-500 ease-out absolute top-0 left-0 w-full translate-x-0',
+        exit: 'transition-transform duration-500 ease-out absolute top-16 left-0 w-full translate-x-0',
         exitActive: '-translate-x-full',
       }}
       timeout={500}

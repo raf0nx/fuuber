@@ -11,7 +11,7 @@ export const HomeLayout: React.FC = () => {
   const location = useLocation()
 
   return (
-    <div>
+    <>
       <Navbar />
       <AnimatedSwitch location={location}>
         <Route path="/home" exact component={HomePage} />
@@ -20,6 +20,6 @@ export const HomeLayout: React.FC = () => {
         <Route path="/profile" exact component={Profile} />
         <Redirect from="/" to="/home" />
       </AnimatedSwitch>
-    </div>
+    </>
   )
 }

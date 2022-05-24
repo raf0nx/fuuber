@@ -4,7 +4,7 @@ import { FaHamburger } from 'react-icons/fa'
 
 export const Navbar = () => {
   return (
-    <nav className="bg-indigo-500 text-white p-4 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
+    <nav className="bg-indigo-500 text-white p-4 mb-1 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
       <NavLink
         to="/"
         exact
