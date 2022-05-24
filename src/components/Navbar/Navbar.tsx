@@ -6,7 +6,7 @@ export const Navbar = () => {
   return (
     <nav className="bg-indigo-500 text-white p-4 mb-1 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
       <NavLink
-        to="/"
+        to="/home"
         exact
         className="font-bold text-xl flex items-center gap-2"
       >
