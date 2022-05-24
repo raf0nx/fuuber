@@ -1,7 +1,6 @@
 import { useHistory } from 'react-router-dom'
 
 import Button from '../../components/UI/Button'
-import Navbar from '../../components/Navbar'
 
 import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks'
 import { logout } from '../../store/slices/auth'
@@ -19,7 +18,6 @@ export const Home: React.FC = () => {
 
   return (
     <section>
-      <Navbar />
       <div>Welcome home!</div>
       <div>{user?.displayName}</div>
       <Button category="primary" onClick={logoutHandler}>

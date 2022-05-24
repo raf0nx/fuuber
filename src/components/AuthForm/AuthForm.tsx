@@ -59,7 +59,7 @@ export const AuthForm: React.FC = () => {
       dispatch(setUser(userData))
       dispatch(setTokenData(tokenData))
 
-      history.replace('/')
+      history.replace('/home')
     } catch (error) {
       const { data } = error as ErrorResponse
 

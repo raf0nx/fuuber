@@ -14,7 +14,7 @@ export const Navbar = () => {
       </NavLink>
       <ul className="flex gap-4 font-medium">
         <NavLink
-          to="/"
+          to="/home"
           exact
           className="hover:text-indigo-900 transition-colors"
           activeClassName="text-indigo-900"
