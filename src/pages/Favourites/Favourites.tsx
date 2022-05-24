@@ -1,1 +1,1 @@
-export const Favourites = () => <h1>Favourites</h1>
+export const Favourites: React.FC = () => <h1>Favourites</h1>
