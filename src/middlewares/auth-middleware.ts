@@ -1,7 +1,7 @@
 import { Middleware } from '@reduxjs/toolkit'
 
-import { logout, setTokenData } from '../store/slices/auth'
-import { RootState } from '../store/store'
+import { logout, setTokenData } from 'store/slices/auth'
+import { RootState } from 'store/store'
 
 export const authMiddleware: Middleware<{}, RootState> =
   _ => next => action => {

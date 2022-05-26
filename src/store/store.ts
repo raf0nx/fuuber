@@ -1,7 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
-import { authApi } from '../api/auth'
-import { authMiddleware } from '../middlewares/auth-middleware'
+import { authApi } from 'api/auth'
+import { authMiddleware } from 'middlewares/auth-middleware'
 import authReducer from './slices/auth'
 
 const rootReducer = combineReducers({

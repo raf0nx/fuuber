@@ -1,10 +1,10 @@
 import { Redirect, Route } from 'react-router-dom'
 
-import AppLayout from './pages/AppLayout'
-import Auth from './pages/Auth'
+import AppLayout from 'pages/AppLayout'
+import Auth from 'pages/Auth'
 
-import { useAppSelector } from './hooks/store-hooks'
-import { usePersistAuthOnReload } from './hooks/persist-auth-on-reload'
+import { useAppSelector } from 'hooks/store-hooks'
+import { usePersistAuthOnReload } from 'hooks/persist-auth-on-reload'
 
 const App: React.FC = () => {
   usePersistAuthOnReload()

@@ -3,7 +3,7 @@ import { FaHamburger } from 'react-icons/fa'
 
 import Avatar from '../Avatar'
 
-import { useAppSelector } from '../../hooks/store-hooks'
+import { useAppSelector } from 'hooks/store-hooks'
 
 export const Navbar: React.FC = () => {
   const photoUrl = useAppSelector(state => state.auth.user?.photoUrl)

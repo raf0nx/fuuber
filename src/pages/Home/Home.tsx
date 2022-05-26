@@ -1,9 +1,9 @@
 import { useHistory } from 'react-router-dom'
 
-import Button from '../../components/UI/Button'
+import Button from 'components/UI/Button'
 
-import { useAppDispatch, useAppSelector } from '../../hooks/store-hooks'
-import { logout } from '../../store/slices/auth'
+import { useAppDispatch, useAppSelector } from 'hooks/store-hooks'
+import { logout } from 'store/slices/auth'
 
 export const Home: React.FC = () => {
   const { user } = useAppSelector(state => state.auth)

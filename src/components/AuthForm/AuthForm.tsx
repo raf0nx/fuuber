@@ -11,14 +11,14 @@ import Card from '../UI/Card'
 import Button from '../UI/Button'
 import Alert from '../UI/Alert'
 
-import { useAppDispatch } from '../../hooks/store-hooks'
-import { useSignInMutation, useSignUpMutation } from '../../api/auth'
-import { setTokenData, setUser } from '../../store/slices/auth'
+import { useAppDispatch } from 'hooks/store-hooks'
+import { useSignInMutation, useSignUpMutation } from 'api/auth'
+import { setTokenData, setUser } from 'store/slices/auth'
 import { authFormValidationSchema } from './validation-schema'
-import { capitalize, snakeCaseToSentenceCase } from '../../utils/string-utils'
+import { capitalize, snakeCaseToSentenceCase } from 'utils/string-utils'
 
-import { AuthFormData } from '../../types/auth'
-import { ErrorResponse } from '../../types/auth-api'
+import { AuthFormData } from 'types/auth'
+import { ErrorResponse } from 'types/auth-api'
 
 export const AuthForm: React.FC = () => {
   const [isLogin, setIsLogin] = useState(true)

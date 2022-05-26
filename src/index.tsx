@@ -4,13 +4,13 @@ import { BrowserRouter } from 'react-router-dom'
 import { initializeApp } from 'firebase/app'
 import { Provider } from 'react-redux'
 
-import App from './App'
+import App from 'App'
 
-import { store } from './store/store'
-import reportWebVitals from './reportWebVitals'
-import { firebaseConfig } from './config/config'
+import { store } from 'store/store'
+import reportWebVitals from 'reportWebVitals'
+import { firebaseConfig } from 'config/config'
 
-import './index.css'
+import 'index.css'
 
 initializeApp(firebaseConfig)
 

@@ -1,8 +1,8 @@
 import { useEffect } from 'react'
 import classNames from 'classnames'
 
-import { ReactComponent as InfoIcon } from '../../../assets/icons/info.svg'
-import { ReactComponent as CloseIcon } from '../../../assets/icons/close.svg'
+import { ReactComponent as InfoIcon } from 'assets/icons/info.svg'
+import { ReactComponent as CloseIcon } from 'assets/icons/close.svg'
 
 interface AlertProps {
   message: string

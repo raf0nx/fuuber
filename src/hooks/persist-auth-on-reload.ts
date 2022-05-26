@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 
-import { useLazyGetUserDataQuery } from '../api/auth'
-import { setTokenData } from '../store/slices/auth'
+import { useLazyGetUserDataQuery } from 'api/auth'
+import { setTokenData } from 'store/slices/auth'
 import { useAppDispatch, useAppSelector } from './store-hooks'
 
 export const usePersistAuthOnReload = () => {

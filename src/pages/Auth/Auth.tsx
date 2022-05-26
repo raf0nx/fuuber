@@ -1,6 +1,6 @@
-import AuthForm from '../../components/AuthForm'
+import AuthForm from 'components/AuthForm'
 
-import authBackground from '../../assets/auth-background.webp'
+import authBackground from 'assets/auth-background.webp'
 
 export const Auth: React.FC = () => {
   return (

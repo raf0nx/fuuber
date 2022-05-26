@@ -1,6 +1,6 @@
 import classNames from 'classnames'
 
-import { ReactComponent as SpinnerIcon } from '../../../assets/icons/spinner.svg'
+import { ReactComponent as SpinnerIcon } from 'assets/icons/spinner.svg'
 
 interface SpinnerProps {
   textPosition?: 'right'
