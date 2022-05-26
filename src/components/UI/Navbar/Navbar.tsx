@@ -1,7 +1,7 @@
 import { NavLink } from 'react-router-dom'
 import { FaHamburger } from 'react-icons/fa'
 
-import Avatar from '../Avatar'
+import Avatar from '../../Avatar'
 
 import { useAppSelector } from 'hooks/store-hooks'
 

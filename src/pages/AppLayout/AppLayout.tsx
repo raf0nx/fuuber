@@ -1,6 +1,6 @@
 import { Redirect, Route, useLocation } from 'react-router-dom'
 
-import Navbar from 'components/Navbar'
+import Navbar from 'components/UI/Navbar'
 import AnimatedSwitch from 'components/AnimatedSwitch'
 import HomePage from '../Home'
 import Favourites from '../Favourites'
