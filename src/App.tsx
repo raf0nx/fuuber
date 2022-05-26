@@ -1,6 +1,6 @@
 import { Redirect, Route } from 'react-router-dom'
 
-import HomeLayout from './pages/HomeLayout'
+import AppLayout from './pages/AppLayout'
 import Auth from './pages/Auth'
 
 import { useAppSelector } from './hooks/store-hooks'
@@ -15,7 +15,7 @@ const App: React.FC = () => {
     <main id="app" className="h-screen w-screen overflow-x-hidden">
       <Route path="/auth">{isLoggedIn ? <Redirect to="/" /> : <Auth />}</Route>
       <Route path="/">
-        {isLoggedIn ? <HomeLayout /> : <Redirect to="/auth" />}
+        {isLoggedIn ? <AppLayout /> : <Redirect to="/auth" />}
       </Route>
     </main>
   )

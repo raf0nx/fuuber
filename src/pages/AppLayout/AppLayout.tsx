@@ -7,7 +7,7 @@ import AnimatedSwitch from '../../components/AnimatedSwitch'
 import Orders from '../Orders'
 import Profile from '../Profile'
 
-export const HomeLayout: React.FC = () => {
+export const AppLayout: React.FC = () => {
   const location = useLocation()
 
   return (
