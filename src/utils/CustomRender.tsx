@@ -2,9 +2,9 @@ import { render as rtlRender } from '@testing-library/react'
 import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
-import authReducer from '../../store/slices/auth'
-import { authApi } from '../../api/auth'
-import { authMiddleware } from '../../middlewares/auth-middleware'
+import authReducer from '../store/slices/auth'
+import { authApi } from '../api/auth'
+import { authMiddleware } from '../middlewares/auth-middleware'
 
 interface WrapperProps {
   children: JSX.Element

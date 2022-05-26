@@ -1,4 +1,4 @@
-import { capitalize, snakeCaseToSentenceCase } from './string-utils'
+import { capitalize, snakeCaseToSentenceCase } from '../string-utils'
 
 describe('capitalize', () => {
   test('it should purely capitalize the provided string', () => {
