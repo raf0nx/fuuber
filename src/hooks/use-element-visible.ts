@@ -1,11 +1,14 @@
 import { useEffect, useRef, useState } from 'react'
 
-export const useElementVisible = (isInitiallyVisible: boolean) => {
+export const useElementVisible = <T>(isInitiallyVisible: boolean) => {
   const [isElementVisible, setIsElementVisible] = useState(isInitiallyVisible)
-  const ref = useRef<HTMLDivElement>(null)
+  const ref = useRef<T>(null)
 
   const clickOutsideHandler = ({ target }: MouseEvent) => {
-    if (ref.current && !ref.current.contains(target as Node)) {
+    if (
+      ref.current &&
+      !(ref.current as unknown as Node).contains(target as Node)
+    ) {
       setIsElementVisible(false)
     }
   }
