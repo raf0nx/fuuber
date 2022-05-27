@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from 'react'
+import { MutableRefObject, useEffect, useRef, useState } from 'react'
 
 export const useElementVisible = <T>(isInitiallyVisible: boolean) => {
   const [isElementVisible, setIsElementVisible] = useState(isInitiallyVisible)
-  const ref = useRef<T>(null)
+  const ref = useRef<T>(null) as MutableRefObject<T>
 
   const clickOutsideHandler = ({ target }: MouseEvent) => {
     if (
