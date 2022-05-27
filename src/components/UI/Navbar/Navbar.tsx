@@ -17,31 +17,37 @@ export const Navbar: React.FC = () => {
       >
         <FaHamburger /> React Food
       </NavLink>
-      <ul className="flex gap-4 font-semibold">
-        <NavLink
-          to="/home"
-          exact
-          className="hover:text-indigo-900 transition-colors"
-          activeClassName="text-indigo-900"
-        >
-          Home
-        </NavLink>
-        <NavLink
-          to="/favourites"
-          exact
-          className="hover:text-indigo-900 transition-colors"
-          activeClassName="text-indigo-900"
-        >
-          Favourites
-        </NavLink>
-        <NavLink
-          to="/orders"
-          exact
-          className="hover:text-indigo-900 transition-colors"
-          activeClassName="text-indigo-900"
-        >
-          Orders
-        </NavLink>
+      <ul className="flex gap-4 font-semibold transition-colors">
+        <li className="hover:text-indigo-900">
+          <NavLink
+            to="/home"
+            exact
+            className="block h-full"
+            activeClassName="text-indigo-900"
+          >
+            Home
+          </NavLink>
+        </li>
+        <li className="hover:text-indigo-900">
+          <NavLink
+            to="/favourites"
+            exact
+            className="block h-full"
+            activeClassName="text-indigo-900"
+          >
+            Favourites
+          </NavLink>
+        </li>
+        <li className="hover:text-indigo-900">
+          <NavLink
+            to="/orders"
+            exact
+            className="block h-full"
+            activeClassName="text-indigo-900"
+          >
+            Orders
+          </NavLink>
+        </li>
       </ul>
       <Avatar imageUrl={photoUrl} />
     </nav>

@@ -10,13 +10,13 @@ export const Dropdown: React.FC<DropdownProps> = ({
   classes = '',
 }) => {
   return (
-    <div
+    <ul
       className={classNames(
         'z-10 absolute bg-white divide-y divide-gray-100 rounded shadow text-gray-700',
         classes
       )}
     >
       {children}
-    </div>
+    </ul>
   )
 }

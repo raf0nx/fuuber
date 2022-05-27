@@ -9,8 +9,8 @@ export const DropdownItem: React.FC<DropdownItemProps> = ({
   classes = '',
 }) => {
   return (
-    <div className={classNames('flex flex-col text-sm py-1', classes)}>
+    <li className={classNames('flex flex-col text-sm py-1', classes)}>
       {children}
-    </div>
+    </li>
   )
 }
