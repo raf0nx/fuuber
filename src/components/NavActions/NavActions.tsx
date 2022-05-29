@@ -5,6 +5,7 @@ import { FiLogOut, FiSettings, FiUser } from 'react-icons/fi'
 
 import Dropdown from 'components/UI/Dropdown'
 import { DropdownItem } from 'components/UI/Dropdown'
+import { Avatar } from 'components/UI/Avatar'
 
 import { logout } from 'store/slices/auth'
 import { useAppSelector } from 'hooks/store-hooks'
@@ -13,13 +14,7 @@ import { isKeyEnterOrSpace } from 'utils/utils'
 
 import { KeyboardEventCodes } from 'types/enums/KeyboardEventCodes'
 
-import { ReactComponent as AvatarPlaceholder } from 'assets/icons/avatar-placeholder.svg'
-
-interface AvatarProps {
-  imageUrl?: string
-}
-
-export const Avatar: React.FC<AvatarProps> = ({ imageUrl }) => {
+export const NavActions: React.FC = () => {
   const authUser = useAppSelector(state => state.auth.user)
   const location = useLocation()
   const history = useHistory()
@@ -64,39 +59,18 @@ export const Avatar: React.FC<AvatarProps> = ({ imageUrl }) => {
       ref={ref}
       onKeyDown={({ nativeEvent }) => dropdownKeyDownHandler(nativeEvent.code)}
     >
-      {imageUrl && (
-        <img
-          className="relative w-8 h-8 rounded-full ring-2 ring-gray-300 cursor-pointer"
-          src={imageUrl}
-          alt="User avatar"
-          onClick={() => setIsElementVisible(!isElementVisible)}
-          onKeyDown={keyDownHandler}
-          ref={avatarRef}
-          role="button"
-          aria-expanded={isElementVisible}
-          tabIndex={0}
-        />
-      )}
-      {!imageUrl && (
-        <div
-          className="relative w-8 h-8 overflow-hidden bg-gray-100 ring-2 ring-gray-300 rounded-full cursor-pointer"
-          onClick={() => setIsElementVisible(!isElementVisible)}
-          onKeyDown={keyDownHandler}
-          ref={avatarRef}
-          role="button"
-          aria-label="Avatar image placeholder"
-          aria-expanded={isElementVisible}
-          tabIndex={0}
-        >
-          <div className="absolute w-10 h-10 text-gray-400 -left-1">
-            <AvatarPlaceholder />
-          </div>
-        </div>
-      )}
+      <Avatar
+        imageUrl={authUser?.photoUrl}
+        role="button"
+        aria-expanded={isElementVisible}
+        ref={avatarRef}
+        onClick={() => setIsElementVisible(!isElementVisible)}
+        onKeyDown={keyDownHandler}
+      />
       {isElementVisible && (
         <Dropdown classes="top-10 right-0 w-44">
           <DropdownItem classes="text-gray-900">
-            <p className="px-4 pt-2">{authUser?.displayName}</p>
+            <p className="px-4 pt-2 truncated">{authUser?.displayName}</p>
             <p className="px-4 pb-2 font-medium truncate">{authUser?.email}</p>
           </DropdownItem>
           <DropdownItem classes="text-gray-700">
