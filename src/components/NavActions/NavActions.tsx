@@ -29,15 +29,8 @@ export const NavActions: React.FC = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location])
 
-  const keyDownHandler = (event: React.KeyboardEvent) => {
-    event.stopPropagation()
-
-    if (event.nativeEvent.code === KeyboardEventCodes.ESCAPE) {
-      dropdownKeyDownHandler(event.nativeEvent.code)
-      return
-    }
-
-    if (!isKeyEnterOrSpace(event.nativeEvent.code)) return
+  const keyDownHandler = (code: string) => {
+    if (!isKeyEnterOrSpace(code)) return
     setIsElementVisible(!isElementVisible)
   }
 
@@ -65,12 +58,12 @@ export const NavActions: React.FC = () => {
         aria-expanded={isElementVisible}
         ref={avatarRef}
         onClick={() => setIsElementVisible(!isElementVisible)}
-        onKeyDown={keyDownHandler}
+        onKeyDown={({ nativeEvent }) => keyDownHandler(nativeEvent.code)}
       />
       {isElementVisible && (
         <Dropdown classes="top-10 right-0 w-44">
           <DropdownItem classes="text-gray-900">
-            <p className="px-4 pt-2 truncated">{authUser?.displayName}</p>
+            <p className="px-4 pt-2 truncate">{authUser?.displayName}</p>
             <p className="px-4 pb-2 font-medium truncate">{authUser?.email}</p>
           </DropdownItem>
           <DropdownItem classes="text-gray-700">
