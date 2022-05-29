@@ -43,7 +43,8 @@
       "!src/index.tsx",
       "!src/reportWebVitals.ts",
       "!src/store/store.ts",
-      "!src/components/UI/**/*"
+      "!src/components/UI/**/*",
+      "src/components/UI/Dropdown/*"
     ]
   },
   "eslintConfig": {
