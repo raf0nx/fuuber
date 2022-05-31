@@ -1,4 +1,4 @@
-import { useEffect } from 'react'
+import { MutableRefObject, useEffect, useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
 import { CSSTransition } from 'react-transition-group'
@@ -18,10 +18,11 @@ interface DropdownProps {
 export const Dropdown: React.FC<DropdownProps> = ({
   items,
   children,
-  classes = '',
+  classes,
 }) => {
   const { ref, isElementVisible, setIsElementVisible } =
     useElementVisible<HTMLDivElement>(false)
+  const dropdownActivatorRef = useRef() as MutableRefObject<HTMLDivElement>
 
   const location = useLocation()
 
@@ -33,28 +34,31 @@ export const Dropdown: React.FC<DropdownProps> = ({
   const keyDownHandler = (code: string) => {
     if (code === KeyboardEventCodes.ESCAPE && isElementVisible) {
       setIsElementVisible(false)
-      ref.current.focus()
-
-      return
+      dropdownActivatorRef.current.focus()
     }
-
-    if (!isKeyEnterOrSpace(code)) return
-    setIsElementVisible(!isElementVisible)
   }
 
   return (
     <div
-      onClick={() => setIsElementVisible(!isElementVisible)}
-      onKeyDown={({ nativeEvent }) => keyDownHandler(nativeEvent.code)}
       className="relative"
       ref={ref}
-      tabIndex={0}
-      role="button"
-      aria-expanded={isElementVisible}
-      aria-controls={isElementVisible ? 'dropdown-menu' : undefined}
-      aria-haspopup="true"
+      onKeyDown={({ nativeEvent }) => keyDownHandler(nativeEvent.code)}
     >
-      {children}
+      <div
+        onClick={() => setIsElementVisible(!isElementVisible)}
+        onKeyDown={({ nativeEvent }) =>
+          isKeyEnterOrSpace(nativeEvent.code) &&
+          setIsElementVisible(!isElementVisible)
+        }
+        ref={dropdownActivatorRef}
+        tabIndex={0}
+        role="button"
+        aria-expanded={isElementVisible}
+        aria-controls={isElementVisible ? 'dropdown-menu' : undefined}
+        aria-haspopup="true"
+      >
+        {children}
+      </div>
       <CSSTransition
         in={isElementVisible}
         timeout={{
@@ -68,6 +72,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
         unmountOnExit
       >
         <ul
+          id="dropdown-menu"
           className={classNames(
             'z-10 absolute bg-white divide-y divide-gray-100 rounded shadow text-gray-700',
             classes
