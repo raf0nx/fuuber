@@ -29,7 +29,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
   useEffect(() => {
     isElementVisible && setIsElementVisible(false)
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [location])
+  }, [location.pathname])
 
   const keyDownHandler = (code: string) => {
     if (code === KeyboardEventCodes.ESCAPE && isElementVisible) {
