@@ -57,13 +57,17 @@ jest.mock('react-router-dom', () => ({
 describe('<AuthForm />', () => {
   beforeAll(() => server.listen())
 
+  beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
+    customRender(<AuthForm />)
+  })
+
   afterEach(() => server.resetHandlers())
 
   afterAll(() => server.close())
 
   test('should change auth mode', async () => {
     // Given
-    customRender(<AuthForm />)
     expect(screen.getByText(/really hungry?/i)).toBeInTheDocument()
 
     // When
@@ -80,7 +84,6 @@ describe('<AuthForm />', () => {
 
   test('should update email, name and password', async () => {
     // Given
-    customRender(<AuthForm />)
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
@@ -104,7 +107,6 @@ describe('<AuthForm />', () => {
 
   test('should sign in user in login mode', async () => {
     // Given
-    customRender(<AuthForm />)
 
     const emailInput = screen.getByLabelText(/e-mail address/i)
     const passwordInput = screen.getByLabelText(/password/i)
@@ -122,7 +124,6 @@ describe('<AuthForm />', () => {
 
   test('should sign up a user in register mode', async () => {
     // Given
-    customRender(<AuthForm />)
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
     // When
@@ -145,8 +146,6 @@ describe('<AuthForm />', () => {
 
   test('should catch a server side error, display error message in the alert and dismiss the alert', async () => {
     // Given
-    customRender(<AuthForm />)
-
     server.use(
       rest.post(
         'https://identitytoolkit.googleapis.com/v1/accounts/:signInWithPassword',
