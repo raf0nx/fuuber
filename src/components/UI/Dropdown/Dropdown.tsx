@@ -1,6 +1,7 @@
 import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import classNames from 'classnames'
+import { CSSTransition } from 'react-transition-group'
 
 import { DropdownItem } from './DropdownItem'
 
@@ -54,7 +55,18 @@ export const Dropdown: React.FC<DropdownProps> = ({
       aria-haspopup="true"
     >
       {children}
-      {isElementVisible && (
+      <CSSTransition
+        in={isElementVisible}
+        timeout={{
+          enter: 400,
+          exit: 280,
+        }}
+        classNames={{
+          enterActive: 'animate-rotate-x origin-top-right',
+          exitActive: 'animate-fade-out',
+        }}
+        unmountOnExit
+      >
         <ul
           className={classNames(
             'z-10 absolute bg-white divide-y divide-gray-100 rounded shadow text-gray-700',
@@ -73,7 +85,7 @@ export const Dropdown: React.FC<DropdownProps> = ({
               </DropdownItem>
             ))}
         </ul>
-      )}
+      </CSSTransition>
     </div>
   )
 }

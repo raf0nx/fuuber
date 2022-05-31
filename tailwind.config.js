@@ -30,11 +30,23 @@ module.exports = {
           '90%': { transform: 'skewX(-5deg)' },
           '100%': { transform: 'skewX(0deg)' },
         },
+        'rotate-x': {
+          '0%': {
+            transform: 'rotateX(-90deg)',
+          },
+          '70%': {
+            transform: 'rotateX(20deg)',
+          },
+          '100%': {
+            transform: 'rotateX(0deg)',
+          },
+        },
       },
       animation: {
         shake: 'shake 1.2s ease-in-out',
         'fade-out': 'fade-out .3s linear',
         'slide-in': 'slide-in .7s ease-in',
+        'rotate-x': 'rotate-x .4s ease-in-out forwards',
       },
       width: {
         128: '32rem',
