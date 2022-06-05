@@ -6,8 +6,7 @@ import { rest } from 'msw'
 import App from 'App'
 
 import { customRender } from 'utils/test-utils/CustomRender'
-
-const BASE_AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts/'
+import { BASE_AUTH_URL_MOCK } from 'utils/test-utils/mocked-data'
 
 describe('<App />', () => {
   test('should render login page while user not authenticated', () => {
@@ -38,7 +37,7 @@ describe('<App />', () => {
   test('should get user data when the page is (re)loaded and auth data is present in the session storage', async () => {
     // Given
     const server = setupServer(
-      rest.post(`${BASE_AUTH_URL}:lookup`, (_, res, ctx) => {
+      rest.post(`${BASE_AUTH_URL_MOCK}:lookup`, (_, res, ctx) => {
         return res(
           ctx.status(200),
           ctx.json({
