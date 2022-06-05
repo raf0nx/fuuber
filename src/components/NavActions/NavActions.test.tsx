@@ -1,15 +1,11 @@
 import { screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { MemoryRouter } from 'react-router-dom'
 
 import { NavActions } from './NavActions'
 
-import { customRender } from 'utils/CustomRender'
-import { MemoryRouter } from 'react-router-dom'
-
-const TEST_AUTH_USER = {
-  email: 'test@email.com',
-  displayName: 'Name',
-}
+import { customRender } from 'utils/test-utils/CustomRender'
+import { AUTH_USER_MOCK } from 'utils/test-utils/mocked-data'
 
 const mockedUseHistory = jest.fn()
 
@@ -32,8 +28,8 @@ describe('<NavActions />', () => {
         initialState: {
           auth: {
             user: {
-              email: TEST_AUTH_USER.email,
-              displayName: TEST_AUTH_USER.displayName,
+              email: AUTH_USER_MOCK.email,
+              displayName: AUTH_USER_MOCK.displayName,
             },
           },
         },
@@ -46,7 +42,7 @@ describe('<NavActions />', () => {
     await userEvent.click(screen.getByRole(/button/i))
 
     // Then
-    expect(screen.getByText(TEST_AUTH_USER.email)).toBeInTheDocument()
+    expect(screen.getByText(AUTH_USER_MOCK.email)).toBeInTheDocument()
   })
 
   test('Should logout user on sign out click', async () => {
@@ -74,7 +70,7 @@ describe('<NavActions />', () => {
     await userEvent.keyboard('[Enter]')
 
     // Then
-    expect(screen.getByText(TEST_AUTH_USER.displayName)).toBeInTheDocument()
+    expect(screen.getByText(AUTH_USER_MOCK.displayName)).toBeInTheDocument()
   })
 
   test('Should close dropdown on [Escape] and focus dropdown activator', async () => {
@@ -85,7 +81,7 @@ describe('<NavActions />', () => {
     // Then
     // We need to waitFor because dismissing animation lasts 300ms
     await waitFor(() =>
-      expect(screen.queryByText(TEST_AUTH_USER.email)).not.toBeInTheDocument()
+      expect(screen.queryByText(AUTH_USER_MOCK.email)).not.toBeInTheDocument()
     )
     expect(screen.getByRole(/button/i)).toHaveFocus()
   })
@@ -99,7 +95,7 @@ describe('<NavActions />', () => {
     // Then
     // We need to waitFor because dismissing animation lasts 300ms
     await waitFor(() =>
-      expect(screen.queryByText(TEST_AUTH_USER.email)).not.toBeInTheDocument()
+      expect(screen.queryByText(AUTH_USER_MOCK.email)).not.toBeInTheDocument()
     )
   })
 
@@ -111,13 +107,13 @@ describe('<NavActions />', () => {
     // Then
     // We need to waitFor because dismissing animation lasts 300ms
     await waitFor(() =>
-      expect(screen.queryByText(TEST_AUTH_USER.email)).not.toBeInTheDocument()
+      expect(screen.queryByText(AUTH_USER_MOCK.email)).not.toBeInTheDocument()
     )
 
     await userEvent.click(screen.getByRole(/button/i))
     await userEvent.click(screen.getByText(/profile/i))
 
-    expect(await screen.findByText(TEST_AUTH_USER.email)).toBeInTheDocument()
+    expect(await screen.findByText(AUTH_USER_MOCK.email)).toBeInTheDocument()
   })
 
   test('Should close dropdown on click outside', async () => {
@@ -128,7 +124,7 @@ describe('<NavActions />', () => {
     // Then
     // We need to waitFor because dismissing animation lasts 300ms
     await waitFor(() =>
-      expect(screen.queryByText(TEST_AUTH_USER.email)).not.toBeInTheDocument()
+      expect(screen.queryByText(AUTH_USER_MOCK.email)).not.toBeInTheDocument()
     )
   })
 })

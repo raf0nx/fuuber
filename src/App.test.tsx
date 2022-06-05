@@ -5,7 +5,7 @@ import { rest } from 'msw'
 
 import App from 'App'
 
-import { customRender } from 'utils/CustomRender'
+import { customRender } from 'utils/test-utils/CustomRender'
 
 const BASE_AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts/'
 

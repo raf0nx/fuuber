@@ -5,37 +5,33 @@ import { setupServer } from 'msw/node'
 
 import AuthForm from '.'
 
-import { customRender } from 'utils/CustomRender'
-
-const BASE_AUTH_URL = 'https://identitytoolkit.googleapis.com/v1/accounts/'
-
-const testUserData = {
-  email: 'test@email.com',
-  displayName: 'Name',
-  password: 'Password1',
-}
+import { customRender } from 'utils/test-utils/CustomRender'
+import {
+  AUTH_USER_MOCK,
+  BASE_AUTH_URL_MOCK,
+} from 'utils/test-utils/mocked-data'
 
 const server = setupServer(
-  rest.post(`${BASE_AUTH_URL}:signInWithPassword`, (_, res, ctx) => {
+  rest.post(`${BASE_AUTH_URL_MOCK}:signInWithPassword`, (_, res, ctx) => {
     return res(
       ctx.status(201),
       ctx.json({
         localId: 'localId',
-        email: testUserData.email,
-        displayName: testUserData.displayName,
+        email: AUTH_USER_MOCK.email,
+        displayName: AUTH_USER_MOCK.displayName,
         idToken: 'authToken',
         refreshToken: 'refreshToken',
         expiresIn: 'timestamp',
       })
     )
   }),
-  rest.post(`${BASE_AUTH_URL}:signUp`, (_, res, ctx) => {
+  rest.post(`${BASE_AUTH_URL_MOCK}:signUp`, (_, res, ctx) => {
     return res(
       ctx.status(201),
       ctx.json({
         localId: 'localId',
-        email: testUserData.email,
-        displayName: testUserData.displayName,
+        email: AUTH_USER_MOCK.email,
+        displayName: AUTH_USER_MOCK.displayName,
         idToken: 'authToken',
         refreshToken: 'refreshToken',
         expiresIn: 'timestamp',
@@ -89,20 +85,22 @@ describe('<AuthForm />', () => {
     // When
     await userEvent.click(changeAuthModeBtn)
 
-    const emailInput = screen.getByLabelText(
-      /e-mail address/i
-    ) as HTMLInputElement
-    const nameInput = screen.getByLabelText(/name/i) as HTMLInputElement
-    const passwordInput = screen.getByLabelText(/password/i) as HTMLInputElement
+    const emailInput = screen.getByLabelText(/e-mail address/i)
+    const nameInput = screen.getByLabelText(/name/i)
+    const passwordInput = screen.getByLabelText(/password/i)
 
-    await userEvent.type(emailInput, testUserData.email)
-    await userEvent.type(nameInput, testUserData.displayName)
-    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.type(emailInput, AUTH_USER_MOCK.email)
+    await userEvent.type(nameInput, AUTH_USER_MOCK.displayName)
+    await userEvent.type(passwordInput, AUTH_USER_MOCK.password)
 
     // Then
-    expect(emailInput.value).toBe(testUserData.email)
-    expect(nameInput.value).toBe(testUserData.displayName)
-    expect(passwordInput.value).toBe(testUserData.password)
+    expect((emailInput as HTMLInputElement).value).toBe(AUTH_USER_MOCK.email)
+    expect((nameInput as HTMLInputElement).value).toBe(
+      AUTH_USER_MOCK.displayName
+    )
+    expect((passwordInput as HTMLInputElement).value).toBe(
+      AUTH_USER_MOCK.password
+    )
   })
 
   test('should sign in user in login mode', async () => {
@@ -113,8 +111,8 @@ describe('<AuthForm />', () => {
     const signInButton = screen.getByText(/sign in/i)
 
     // When
-    await userEvent.type(emailInput, testUserData.email)
-    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.type(emailInput, AUTH_USER_MOCK.email)
+    await userEvent.type(passwordInput, AUTH_USER_MOCK.password)
     await userEvent.click(signInButton)
 
     // Then
@@ -134,9 +132,9 @@ describe('<AuthForm />', () => {
     const passwordInput = screen.getByLabelText(/password/i)
     const signUpButton = screen.getByText(/create account/i)
 
-    await userEvent.type(emailInput, testUserData.email)
-    await userEvent.type(nameInput, testUserData.displayName)
-    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.type(emailInput, AUTH_USER_MOCK.email)
+    await userEvent.type(nameInput, AUTH_USER_MOCK.displayName)
+    await userEvent.type(passwordInput, AUTH_USER_MOCK.password)
     await userEvent.click(signUpButton)
 
     // Then
@@ -168,8 +166,8 @@ describe('<AuthForm />', () => {
     const signInButton = screen.getByText(/sign in/i)
 
     // When
-    await userEvent.type(emailInput, testUserData.email)
-    await userEvent.type(passwordInput, testUserData.password)
+    await userEvent.type(emailInput, AUTH_USER_MOCK.email)
+    await userEvent.type(passwordInput, AUTH_USER_MOCK.password)
     await userEvent.click(signInButton)
 
     // Then
