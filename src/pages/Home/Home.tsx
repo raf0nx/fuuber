@@ -1,8 +1,6 @@
-import { FaChevronRight } from 'react-icons/fa'
-
-import Button from 'components/UI/Button'
-
 import { useAppSelector } from 'hooks/store-hooks'
+
+import FoodCardItem from 'components/FoodCardItem'
 
 const MOCKED_FOOD = [
   {
@@ -76,33 +74,7 @@ export const Home: React.FC = () => {
       </h2>
       <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
         {MOCKED_FOOD.map(item => (
-          <div
-            className="bg-white rounded-lg border border-gray-200 shadow-md"
-            key={item.id}
-          >
-            <img
-              src={item.img}
-              className="rounded-t w-full h-60 object-cover"
-              alt="Food"
-            />
-            <div className="p-4">
-              <h3 className="text-lg font-semibold text-gray-900 mb-2 truncate">
-                {item.name}
-              </h3>
-              <p className="text-slate-500 text-sm line-clamp-3 h-15">
-                {item.description}
-              </p>
-              <hr className="my-4" />
-              <div className="flex items-center justify-between">
-                <p className="font-semibold text-2xl text-indigo-500">
-                  $ {item.price}
-                </p>
-                <Button category="primary" name="Add to Cart">
-                  <FaChevronRight />
-                </Button>
-              </div>
-            </div>
-          </div>
+          <FoodCardItem item={item} key={item.id} />
         ))}
       </div>
     </section>
