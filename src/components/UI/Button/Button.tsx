@@ -6,7 +6,10 @@ interface ButtonProps {
   name?: string
   disabled?: boolean
   classes?: string
+  ariaLabel?: string
   onClick?: () => void
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 export const Button: React.FC<ButtonProps> = ({
@@ -16,7 +19,10 @@ export const Button: React.FC<ButtonProps> = ({
   name,
   disabled = false,
   classes = '',
+  ariaLabel,
   onClick,
+  onFocus,
+  onBlur,
 }) => {
   const buttonStyles = classNames(
     'py-2.5 px-5 text-sm font-medium rounded-lg transition-colors duration-200 focus:outline-none focus:ring-2',
@@ -42,7 +48,10 @@ export const Button: React.FC<ButtonProps> = ({
       type={type}
       name={name}
       disabled={disabled}
+      aria-label={ariaLabel}
       onClick={onClick}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {children}
     </button>
