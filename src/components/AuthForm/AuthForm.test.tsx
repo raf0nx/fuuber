@@ -62,7 +62,7 @@ describe('<AuthForm />', () => {
 
   afterAll(() => server.close())
 
-  test('should change auth mode', async () => {
+  test('Should change auth mode', async () => {
     // Given
     expect(screen.getByText(/really hungry?/i)).toBeInTheDocument()
 
@@ -78,7 +78,7 @@ describe('<AuthForm />', () => {
     expect(screen.getByText(/create a new account/i)).toBeInTheDocument()
   })
 
-  test('should update email, name and password', async () => {
+  test('Should update email, name and password', async () => {
     // Given
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
@@ -103,7 +103,7 @@ describe('<AuthForm />', () => {
     )
   })
 
-  test('should sign in user in login mode', async () => {
+  test('Should sign in user in login mode', async () => {
     // Given
 
     const emailInput = screen.getByLabelText(/e-mail address/i)
@@ -120,7 +120,7 @@ describe('<AuthForm />', () => {
     await waitFor(() => expect(mockedUseHistory).toHaveBeenCalled())
   })
 
-  test('should sign up a user in register mode', async () => {
+  test('Should sign up a user in register mode', async () => {
     // Given
     const changeAuthModeBtn = screen.getByText(/sign up!/i)
 
@@ -142,7 +142,7 @@ describe('<AuthForm />', () => {
     await waitFor(() => expect(mockedUseHistory).toHaveBeenCalled())
   })
 
-  test('should catch a server side error, display error message in the alert and dismiss the alert', async () => {
+  test('Should catch a server side error, display error message in the alert and dismiss the alert', async () => {
     // Given
     server.use(
       rest.post(
