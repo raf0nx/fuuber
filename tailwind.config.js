@@ -54,6 +54,9 @@ module.exports = {
       minHeight: {
         4: '1rem',
       },
+      height: {
+        15: '3.75rem',
+      },
     },
   },
   plugins: [require('@tailwindcss/line-clamp')],
