@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
 
 import Button from 'components/UI/Button'
+import Card from 'components/UI/Card'
 
 interface FoodCardItemProps {
   item: {
@@ -19,14 +20,13 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const [isButtonFocused, setIsButtonFocused] = useState(false)
 
   return (
-    <article
-      className={classNames(
-        'bg-white rounded-lg border border-gray-200 shadow-md cursor-pointer hover:scale-105 hover:shadow-lg focus:scale-105 transition-transform',
+    <Card
+      classes={classNames(
+        'cursor-pointer hover:scale-105 hover:shadow-lg focus:scale-105 transition-transform',
         { 'scale-105': isButtonFocused }
       )}
-      key={item.id}
       tabIndex={0}
-      aria-labelledby={`articleHeading${item.id}`}
+      ariaLabelledby={`articleHeading${item.id}`}
     >
       <img
         src={item.img}
@@ -59,6 +59,6 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           </Button>
         </div>
       </div>
-    </article>
+    </Card>
   )
 }
