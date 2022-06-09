@@ -12,7 +12,6 @@ interface FoodCardItemProps {
     price: number
     description: string
     img: string
-    quantity: number
   }
 }
 

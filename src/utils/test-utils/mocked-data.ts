@@ -13,5 +13,4 @@ export const FOOD_ITEM_MOCK = {
   price: 29.99,
   description: 'Choco Sundae Cup (100 ml)',
   img: 'https://api.pizzahut.io/v1/content/en-in/in-1/images/dessert/choco-sundae.e0d29fd156012e251c099c2771219d18.1.jpg?width=800',
-  quantity: 1,
 }
