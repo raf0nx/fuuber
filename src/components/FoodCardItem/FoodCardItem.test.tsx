@@ -7,7 +7,6 @@ import { FOOD_ITEM_MOCK } from 'utils/test-utils/mocked-data'
 
 describe('<FoodCardItem />', () => {
   beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-setup
     render(<FoodCardItem item={FOOD_ITEM_MOCK} />)
   })
 

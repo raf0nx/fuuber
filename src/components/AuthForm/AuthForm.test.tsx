@@ -54,7 +54,6 @@ describe('<AuthForm />', () => {
   beforeAll(() => server.listen())
 
   beforeEach(() => {
-    // eslint-disable-next-line testing-library/no-render-in-setup
     customRender(<AuthForm />)
   })
 
