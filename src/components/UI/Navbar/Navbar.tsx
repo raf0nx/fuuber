@@ -5,7 +5,7 @@ import NavActions from '../../NavActions'
 
 export const Navbar: React.FC = () => {
   return (
-    <nav className="bg-indigo-500 text-white p-4 mb-1 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0">
+    <nav className="bg-indigo-500 text-white p-4 mb-1 rounded-b shadow shadow-indigo-500 flex justify-between items-center sticky top-0 z-10">
       <NavLink
         to="/home"
         exact
