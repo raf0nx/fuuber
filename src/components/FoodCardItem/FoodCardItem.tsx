@@ -5,14 +5,10 @@ import { FaChevronRight } from 'react-icons/fa'
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
 
+import { Food } from 'types/food'
+
 interface FoodCardItemProps {
-  item: {
-    id: number
-    name: string
-    price: number
-    description: string
-    img: string
-  }
+  item: Food
 }
 
 export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
