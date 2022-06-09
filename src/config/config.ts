@@ -1,6 +1,7 @@
 export const firebaseConfig = {
   apiKey: 'AIzaSyBg6jtV6SrrvtwqJKEdf3HGSNrMlh5seb4',
   authDomain: 'food-order-app-9f2a7.firebaseapp.com',
+  authApiUrl: 'https://identitytoolkit.googleapis.com/v1/accounts',
   databaseURL:
     'https://food-order-app-9f2a7-default-rtdb.europe-west1.firebasedatabase.app',
   projectId: 'food-order-app-9f2a7',

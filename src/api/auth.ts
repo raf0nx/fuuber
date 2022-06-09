@@ -8,7 +8,7 @@ import { AuthFormData, User } from '../types/auth'
 export const authApi = createApi({
   reducerPath: 'authApi',
   baseQuery: fetchBaseQuery({
-    baseUrl: 'https://identitytoolkit.googleapis.com/v1/accounts',
+    baseUrl: firebaseConfig.authApiUrl,
   }),
   endpoints: build => ({
     signIn: build.mutation<TransformedAuthResponse, AuthFormData>({
