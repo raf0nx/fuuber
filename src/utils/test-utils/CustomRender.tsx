@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import authReducer from '../../store/slices/auth'
 import { authApi } from '../../api/auth'
 import { authMiddleware } from '../../middlewares/auth-middleware'
+import { foodApi } from 'api/food'
 
 interface WrapperProps {
   children: JSX.Element
@@ -15,10 +16,18 @@ const customRender = (
   {
     initialState = {},
     store = configureStore({
-      reducer: { auth: authReducer, [authApi.reducerPath]: authApi.reducer },
+      reducer: {
+        auth: authReducer,
+        [authApi.reducerPath]: authApi.reducer,
+        [foodApi.reducerPath]: foodApi.reducer,
+      },
       preloadedState: initialState,
       middleware: getDefaultMiddleware =>
-        getDefaultMiddleware().concat(authApi.middleware, authMiddleware),
+        getDefaultMiddleware().concat(
+          authApi.middleware,
+          authMiddleware,
+          foodApi.middleware
+        ),
     }),
     ...renderOptions
   }: any = {}
