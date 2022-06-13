@@ -3,14 +3,35 @@ import FoodCardItem from 'components/FoodCardItem'
 import { useGetFoodsQuery } from 'api/food'
 
 import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
+import Alert from 'components/UI/Alert'
+import { CSSTransition } from 'react-transition-group'
 
 export const Foods: React.FC = () => {
-  const { data: foods, isSuccess } = useGetFoodsQuery()
+  const { data: foods, isSuccess, isError } = useGetFoodsQuery()
 
+  // console.log(error)
   return (
     <>
+      <CSSTransition
+        in={isError}
+        timeout={{
+          enter: 700,
+          exit: 280,
+        }}
+        mountOnEnter
+        unmountOnExit
+        classNames={{
+          enterActive: 'animate-slide-in',
+          exitActive: 'animate-fade-out',
+        }}
+      >
+        <Alert
+          message="Failed to fetch the data. Try again later."
+          type="danger"
+        />
+      </CSSTransition>
       <h2 className="text-xl font-semibold text-gray-900 mb-8">
-        Available meals ({foods?.length})
+        Available meals ({foods?.length || 0})
       </h2>
       {!!foods?.length && isSuccess && (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
