@@ -19,6 +19,7 @@ jest.mock('react-router-dom', () => ({
 
 describe('<NavActions />', () => {
   beforeEach(() => {
+    // eslint-disable-next-line testing-library/no-render-in-setup
     customRender(
       <MemoryRouter>
         <NavActions />

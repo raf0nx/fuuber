@@ -48,11 +48,6 @@
     ]
   },
   "eslintConfig": {
-    "testing-library/no-render-in-setup": [
-      "error", {
-        "allowTestingFrameworkSetupHook": "beforeEach"
-      }
-    ],
     "extends": [
       "react-app",
       "react-app/jest"
