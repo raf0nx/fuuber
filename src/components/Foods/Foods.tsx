@@ -2,15 +2,15 @@ import { CSSTransition } from 'react-transition-group'
 
 import FoodCardItem from 'components/FoodCardItem'
 import Alert from 'components/UI/Alert'
+import FoodCardSkeleton from 'components/FoodCardSkeleton'
 
 import { useGetFoodsQuery } from 'api/food'
 
 import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
 
 export const Foods: React.FC = () => {
-  const { data: foods, isSuccess, isError } = useGetFoodsQuery()
+  const { data: foods, isSuccess, isError, isLoading } = useGetFoodsQuery()
 
-  // console.log(error)
   return (
     <>
       <CSSTransition
@@ -34,6 +34,15 @@ export const Foods: React.FC = () => {
       <h2 className="text-xl font-semibold text-gray-900 mb-8">
         Available meals ({foods?.length || 0})
       </h2>
+      {isLoading && (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
+          {Array(12)
+            .fill(0)
+            .map(() => (
+              <FoodCardSkeleton />
+            ))}
+        </div>
+      )}
       {!!foods?.length && isSuccess && (
         <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
           {foods.map(item => (
