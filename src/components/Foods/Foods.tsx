@@ -1,10 +1,11 @@
+import { CSSTransition } from 'react-transition-group'
+
 import FoodCardItem from 'components/FoodCardItem'
+import Alert from 'components/UI/Alert'
 
 import { useGetFoodsQuery } from 'api/food'
 
 import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
-import Alert from 'components/UI/Alert'
-import { CSSTransition } from 'react-transition-group'
 
 export const Foods: React.FC = () => {
   const { data: foods, isSuccess, isError } = useGetFoodsQuery()
