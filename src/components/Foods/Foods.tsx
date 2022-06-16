@@ -2,7 +2,7 @@ import { CSSTransition } from 'react-transition-group'
 
 import FoodCardItem from 'components/FoodCardItem'
 import Alert from 'components/UI/Alert'
-import FoodCardSkeleton from 'components/FoodCardSkeleton'
+import FoodCardSkeleton from 'components/UI/FoodCardSkeleton'
 
 import { useGetFoodsQuery } from 'api/food'
 
