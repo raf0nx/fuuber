@@ -1,6 +1,7 @@
 import { combineReducers, configureStore } from '@reduxjs/toolkit'
 
 import { authApi } from 'api/auth'
+import { favouritesApi } from 'api/favourites'
 import { foodApi } from 'api/food'
 import { authMiddleware } from 'middlewares/auth-middleware'
 import authReducer from './slices/auth'
@@ -9,6 +10,7 @@ const rootReducer = combineReducers({
   auth: authReducer,
   [authApi.reducerPath]: authApi.reducer,
   [foodApi.reducerPath]: foodApi.reducer,
+  [favouritesApi.reducerPath]: favouritesApi.reducer,
 })
 
 export const store = configureStore({
@@ -17,7 +19,8 @@ export const store = configureStore({
     getDefaultMiddleware().concat(
       authApi.middleware,
       authMiddleware,
-      foodApi.middleware
+      foodApi.middleware,
+      favouritesApi.middleware
     ),
 })
 

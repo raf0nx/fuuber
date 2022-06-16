@@ -6,6 +6,7 @@ import authReducer from '../../store/slices/auth'
 import { authApi } from '../../api/auth'
 import { authMiddleware } from '../../middlewares/auth-middleware'
 import { foodApi } from 'api/food'
+import { favouritesApi } from 'api/favourites'
 
 interface WrapperProps {
   children: JSX.Element
@@ -20,13 +21,15 @@ const customRender = (
         auth: authReducer,
         [authApi.reducerPath]: authApi.reducer,
         [foodApi.reducerPath]: foodApi.reducer,
+        [favouritesApi.reducerPath]: favouritesApi.reducer,
       },
       preloadedState: initialState,
       middleware: getDefaultMiddleware =>
         getDefaultMiddleware().concat(
           authApi.middleware,
           authMiddleware,
-          foodApi.middleware
+          foodApi.middleware,
+          favouritesApi.middleware
         ),
     }),
     ...renderOptions

@@ -6,6 +6,10 @@ import { MdFavoriteBorder } from 'react-icons/md'
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
 
+import { useUpdateFavouritesMutation } from 'api/favourites'
+import { useAppSelector } from 'hooks/store-hooks'
+import { isKeyEnterOrSpace } from 'utils/utils'
+
 import { Food } from 'types/food'
 
 interface FoodCardItemProps {
@@ -14,6 +18,13 @@ interface FoodCardItemProps {
 
 export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const [isCardFocused, setIsCardFocused] = useState(false)
+
+  const userId = useAppSelector(state => state.auth.user?.localId)
+  const [updateFavourites] = useUpdateFavouritesMutation()
+
+  const toggleFavouriteHandler = () => {
+    userId && updateFavourites({ userId, favouritesIds: [item.id] })
+  }
 
   return (
     <Card
@@ -30,6 +41,10 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
       {isCardFocused && (
         <div
           className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
+          onClick={toggleFavouriteHandler}
+          onKeyDown={({ nativeEvent }) =>
+            isKeyEnterOrSpace(nativeEvent.code) && toggleFavouriteHandler()
+          }
           tabIndex={0}
           aria-label="Add to favourite"
           role="button"

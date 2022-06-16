@@ -9,7 +9,7 @@ export const AUTH_USER_MOCK = {
 }
 
 export const FOOD_ITEM_MOCK = {
-  id: 1,
+  id: '1',
   name: 'Choco Sundae',
   price: 29.99,
   description: 'Choco Sundae Cup (100 ml)',
