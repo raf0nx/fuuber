@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
-import { MdFavoriteBorder } from 'react-icons/md'
+import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
@@ -20,10 +20,23 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const [isCardFocused, setIsCardFocused] = useState(false)
 
   const userId = useAppSelector(state => state.auth.user?.localId)
+  const favouritesIds = useAppSelector(state => state.favourites.favouritesIds)
   const [updateFavourites] = useUpdateFavouritesMutation()
 
+  const isItemFavourite = !!favouritesIds && favouritesIds.includes(item.id)
+
+  const pushNewFavourite = () =>
+    favouritesIds ? [...favouritesIds, item.id] : [item.id]
+
+  const updateFavouritesIds = () =>
+    isItemFavourite
+      ? favouritesIds.filter(id => id !== item.id)
+      : pushNewFavourite()
+
   const toggleFavouriteHandler = () => {
-    userId && updateFavourites({ userId, favouritesIds: [item.id] })
+    if (!userId) return
+
+    updateFavourites({ userId, favouritesIds: updateFavouritesIds() })
   }
 
   return (
@@ -49,7 +62,7 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           aria-label="Add to favourite"
           role="button"
         >
-          <MdFavoriteBorder />
+          {isItemFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
         </div>
       )}
       <img
