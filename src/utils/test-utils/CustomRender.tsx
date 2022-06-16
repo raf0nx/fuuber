@@ -3,6 +3,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { Provider } from 'react-redux'
 
 import authReducer from '../../store/slices/auth'
+import favouritesReducer from '../../store/slices/favourites'
 import { authApi } from '../../api/auth'
 import { authMiddleware } from '../../middlewares/auth-middleware'
 import { foodApi } from 'api/food'
@@ -19,6 +20,7 @@ const customRender = (
     store = configureStore({
       reducer: {
         auth: authReducer,
+        favourites: favouritesReducer,
         [authApi.reducerPath]: authApi.reducer,
         [foodApi.reducerPath]: foodApi.reducer,
         [favouritesApi.reducerPath]: favouritesApi.reducer,

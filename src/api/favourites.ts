@@ -9,12 +9,12 @@ export const favouritesApi = createApi({
     baseUrl: `${firebaseConfig.databaseURL}`,
   }),
   endpoints: build => ({
-    getFavourites: build.query<string[], string>({
+    getFavourites: build.query<string[] | null, string>({
       query: userId => ({
         url: `/favourites/${userId}.json`,
       }),
     }),
-    updateFavourites: build.mutation<void, UpdateFavouritesData>({
+    updateFavourites: build.mutation<string[] | null, UpdateFavouritesData>({
       query: payload => ({
         url: `/favourites/${payload.userId}.json`,
         method: 'PUT',

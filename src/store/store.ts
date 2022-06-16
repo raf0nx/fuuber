@@ -5,9 +5,11 @@ import { favouritesApi } from 'api/favourites'
 import { foodApi } from 'api/food'
 import { authMiddleware } from 'middlewares/auth-middleware'
 import authReducer from './slices/auth'
+import favouritesReducer from './slices/favourites'
 
 const rootReducer = combineReducers({
   auth: authReducer,
+  favourites: favouritesReducer,
   [authApi.reducerPath]: authApi.reducer,
   [foodApi.reducerPath]: foodApi.reducer,
   [favouritesApi.reducerPath]: favouritesApi.reducer,
