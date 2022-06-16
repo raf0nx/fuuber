@@ -6,6 +6,8 @@ interface CardProps {
   ariaLabelledby?: string
   onMouseEnter?: () => void
   onMouseLeave?: () => void
+  onFocus?: () => void
+  onBlur?: () => void
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -15,6 +17,8 @@ export const Card: React.FC<CardProps> = ({
   ariaLabelledby,
   onMouseEnter,
   onMouseLeave,
+  onFocus,
+  onBlur,
 }) => {
   return (
     <article
@@ -26,6 +30,8 @@ export const Card: React.FC<CardProps> = ({
       aria-labelledby={ariaLabelledby}
       onMouseEnter={onMouseEnter}
       onMouseLeave={onMouseLeave}
+      onFocus={onFocus}
+      onBlur={onBlur}
     >
       {children}
     </article>
