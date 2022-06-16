@@ -19,7 +19,7 @@ describe('<FoodCardItem />', () => {
 
     // Then
     expect(screen.getByLabelText(/open modal with meal details/i)).toHaveFocus()
-    expect(screen.getByTestId(/cardArticle/i)).toHaveClass('scale-105')
+    expect(screen.getByRole(/article/i)).toHaveClass('scale-105')
   })
 
   test('Should dismiss Food Card focused display on Add To Cart button blur', async () => {
@@ -33,6 +33,6 @@ describe('<FoodCardItem />', () => {
     expect(
       screen.getByLabelText('Open modal with meal details')
     ).not.toHaveFocus()
-    expect(screen.getByTestId(/cardArticle/i)).not.toHaveClass('scale-105')
+    expect(screen.getByRole(/article/i)).not.toHaveClass('scale-105')
   })
 })

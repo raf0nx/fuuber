@@ -20,7 +20,6 @@ export const Card: React.FC<CardProps> = ({
       )}
       tabIndex={tabIndex}
       aria-labelledby={ariaLabelledby}
-      data-testid="cardArticle"
     >
       {children}
     </article>
