@@ -7,6 +7,7 @@ import App from 'App'
 
 import { customRender } from 'utils/test-utils/CustomRender'
 import { BASE_AUTH_URL_MOCK } from 'utils/test-utils/mocked-data'
+import { firebaseConfig } from 'config/config'
 
 describe('<App />', () => {
   test('Should render login page while user not authenticated', () => {
@@ -54,6 +55,9 @@ describe('<App />', () => {
             ],
           })
         )
+      }),
+      rest.get(`${firebaseConfig.databaseURL}/foods.json`, (_, res, ctx) => {
+        return res(ctx.status(200), ctx.json([]))
       })
     )
     server.listen()
