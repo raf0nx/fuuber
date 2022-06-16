@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
+import { MdFavoriteBorder } from 'react-icons/md'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
@@ -12,17 +13,30 @@ interface FoodCardItemProps {
 }
 
 export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
-  const [isButtonFocused, setIsButtonFocused] = useState(false)
+  const [isCardFocused, setIsCardFocused] = useState(false)
 
   return (
     <Card
       classes={classNames(
-        'cursor-pointer hover:scale-105 hover:shadow-lg focus:scale-105 transition-transform',
-        { 'scale-105': isButtonFocused }
+        'cursor-pointer hover:scale-105 hover:shadow-lg transition-transform relative',
+        { 'scale-105': isCardFocused }
       )}
+      onMouseEnter={() => setIsCardFocused(true)}
+      onMouseLeave={() => setIsCardFocused(false)}
+      onFocus={() => setIsCardFocused(true)}
       tabIndex={0}
       ariaLabelledby={`articleHeading${item.id}`}
     >
+      {isCardFocused && (
+        <div
+          className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
+          tabIndex={0}
+          aria-label="Add to favourite"
+          role="button"
+        >
+          <MdFavoriteBorder />
+        </div>
+      )}
       <img
         src={item.img}
         className="rounded-t w-full h-60 object-cover"
@@ -46,8 +60,7 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           <Button
             category="primary"
             name="Add to Cart"
-            onFocus={() => setIsButtonFocused(true)}
-            onBlur={() => setIsButtonFocused(false)}
+            onBlur={() => setIsCardFocused(false)}
             ariaLabel="Open modal with meal details"
           >
             <FaChevronRight />
