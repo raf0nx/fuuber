@@ -4,6 +4,8 @@ interface CardProps {
   classes?: string
   tabIndex?: number
   ariaLabelledby?: string
+  onMouseEnter?: () => void
+  onMouseLeave?: () => void
 }
 
 export const Card: React.FC<CardProps> = ({
@@ -11,6 +13,8 @@ export const Card: React.FC<CardProps> = ({
   classes,
   tabIndex,
   ariaLabelledby,
+  onMouseEnter,
+  onMouseLeave,
 }) => {
   return (
     <article
@@ -20,6 +24,8 @@ export const Card: React.FC<CardProps> = ({
       )}
       tabIndex={tabIndex}
       aria-labelledby={ariaLabelledby}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       {children}
     </article>
