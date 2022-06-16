@@ -1,17 +1,9 @@
-import { useEffect } from 'react'
-
 import Foods from 'components/Foods'
 
 import { useAppSelector } from 'hooks/store-hooks'
-import { useLazyGetFavouritesQuery } from 'api/favourites'
 
 export const Home: React.FC = () => {
   const { user } = useAppSelector(state => state.auth)
-  const [trigger] = useLazyGetFavouritesQuery()
-
-  useEffect(() => {
-    user && trigger(user.localId)
-  }, [user, trigger])
 
   return (
     <section className="container mx-auto p-4">

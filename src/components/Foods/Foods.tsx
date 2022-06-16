@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
 import FoodCardItem from 'components/FoodCardItem'
@@ -7,9 +8,18 @@ import FoodCardSkeleton from 'components/UI/FoodCardSkeleton'
 import { useGetFoodsQuery } from 'api/food'
 
 import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
+import { useLazyGetFavouritesQuery } from 'api/favourites'
+import { useAppSelector } from 'hooks/store-hooks'
 
 export const Foods: React.FC = () => {
+  const userId = useAppSelector(state => state.auth.user?.localId)
+
   const { data: foods, isSuccess, isError, isLoading } = useGetFoodsQuery()
+  const [fetchFavourites] = useLazyGetFavouritesQuery()
+
+  useEffect(() => {
+    userId && fetchFavourites(userId)
+  }, [userId, fetchFavourites])
 
   const areThereAnyFood = !!foods?.length
 
