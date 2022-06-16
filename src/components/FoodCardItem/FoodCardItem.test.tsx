@@ -11,20 +11,43 @@ describe('<FoodCardItem />', () => {
     render(<FoodCardItem item={FOOD_ITEM_MOCK} />)
   })
 
-  test('Should display Food Card focused on Add To Cart button focus', async () => {
+  test('Should not display Add to Favourite button initally', async () => {
+    // Then
+    expect(screen.queryByLabelText(/add to favourite/i)).not.toBeInTheDocument()
+  })
+
+  test('Should display Add to Favourite button on Food Card Item focus', async () => {
     // When
-    // Tab 2 times to focus button inside the Food Card
-    await userEvent.tab()
     await userEvent.tab()
 
     // Then
-    expect(screen.getByLabelText(/open modal with meal details/i)).toHaveFocus()
-    expect(screen.getByRole(/article/i)).toHaveClass('scale-105')
+    expect(screen.getByLabelText(/add to favourite/i)).toBeInTheDocument()
   })
 
-  test('Should dismiss Food Card focused display on Add To Cart button blur', async () => {
+  test('Should display Add to Favourite button on Food Card Item hover', async () => {
     // When
-    // Tab 3 times to remove focus from Food Card completely
+    await userEvent.hover(screen.getByRole(/article/i))
+
+    // Then
+    expect(screen.getByLabelText(/add to favourite/i)).toBeInTheDocument()
+  })
+
+  test('Should not display Add to Favourite button when Food Card Item is unhovered', async () => {
+    // Given
+    const foodCardItem = screen.getByRole(/article/i)
+
+    // When
+    await userEvent.hover(foodCardItem)
+    await userEvent.unhover(foodCardItem)
+
+    // Then
+    expect(screen.queryByLabelText(/add to favourite/i)).not.toBeInTheDocument()
+  })
+
+  test('Should dismiss Food Card focus on Add To Cart button blur', async () => {
+    // When
+    // Tab 4 times to remove focus from Food Card completely
+    await userEvent.tab()
     await userEvent.tab()
     await userEvent.tab()
     await userEvent.tab()
