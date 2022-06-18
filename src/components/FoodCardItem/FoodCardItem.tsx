@@ -59,7 +59,9 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
             isKeyEnterOrSpace(nativeEvent.code) && toggleFavouriteHandler()
           }
           tabIndex={0}
-          aria-label="Add to favourite"
+          aria-label={
+            isItemFavourite ? 'Remove from favourites' : 'Add to favourites'
+          }
           role="button"
         >
           {isItemFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
