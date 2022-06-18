@@ -58,7 +58,13 @@ describe('<App />', () => {
       }),
       rest.get(`${firebaseConfig.databaseURL}/foods.json`, (_, res, ctx) => {
         return res(ctx.status(200), ctx.json([]))
-      })
+      }),
+      rest.get(
+        `${firebaseConfig.databaseURL}/favourites/localId.json`,
+        (_, res, ctx) => {
+          return res(ctx.status(200), ctx.json(null))
+        }
+      )
     )
     server.listen()
 
