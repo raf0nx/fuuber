@@ -8,6 +8,15 @@ export const AUTH_USER_MOCK = {
   password: 'Password1',
 }
 
+export const USER_DATA_MOCK = {
+  localId: 'rTf4wqjZfSP6wLVQKrHISmuHKbk2',
+  email: 'test@test.pl',
+  displayName: 'Rafał',
+  emailVerified: false,
+  createdAt: '1649193295275',
+  incompleteData: false,
+}
+
 export const FOOD_ITEM_MOCK = {
   id: '1',
   name: 'Choco Sundae',
