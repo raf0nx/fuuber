@@ -6,6 +6,7 @@ import { Foods } from './Foods'
 
 import { firebaseConfig } from 'config/config'
 import { customRender } from 'utils/test-utils/CustomRender'
+import { USER_DATA_MOCK } from 'utils/test-utils/mocked-data'
 
 const server = setupServer(
   rest.get(`${firebaseConfig.databaseURL}/foods.json`, (_, res, ctx) => {
@@ -29,7 +30,13 @@ const server = setupServer(
         },
       ])
     )
-  })
+  }),
+  rest.get(
+    `${firebaseConfig.databaseURL}/favourites/${USER_DATA_MOCK.localId}.json`,
+    (_, res, ctx) => {
+      return res(ctx.status(200), ctx.json(['0', '1']))
+    }
+  )
 )
 
 describe('<FoodCardItem />', () => {
@@ -41,7 +48,11 @@ describe('<FoodCardItem />', () => {
 
   test('Should display all available foods from the server', async () => {
     // Given
-    customRender(<Foods />)
+    customRender(<Foods />, {
+      initialState: {
+        auth: { user: USER_DATA_MOCK },
+      },
+    })
 
     // Then
     expect(await screen.findAllByRole('article')).toHaveLength(2)
