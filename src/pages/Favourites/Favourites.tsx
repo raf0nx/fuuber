@@ -1,4 +1,6 @@
 import FoodCardItem from 'components/FoodCardItem'
+import NotFoundContent from 'components/UI/NotFoundContent'
+
 import { useAppSelector } from 'hooks/store-hooks'
 
 export const Favourites: React.FC = () => {
@@ -34,14 +36,10 @@ export const Favourites: React.FC = () => {
           ))}
         </div>
       ) : (
-        <div className="flex flex-col items-center gap-4">
-          <h2 className="text-xl text-center font-semibold text-gray-900 mt-4">
-            You have no favourite meals at this moment
-          </h2>
-          <p className="text-slate-500">
-            They will appear here as soon as you add some
-          </p>
-        </div>
+        <NotFoundContent
+          header="You have no favourite meals at this moment"
+          secondaryText="They will appear here as soon as you add some"
+        />
       )}
     </section>
   )

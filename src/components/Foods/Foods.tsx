@@ -4,12 +4,14 @@ import { CSSTransition } from 'react-transition-group'
 import FoodCardItem from 'components/FoodCardItem'
 import Alert from 'components/UI/Alert'
 import FoodCardSkeleton from 'components/UI/FoodCardSkeleton'
+import NotFoundContent from 'components/UI/NotFoundContent'
 
 import { useGetFoodsQuery } from 'api/food'
 
-import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
 import { useLazyGetFavouritesQuery } from 'api/favourites'
 import { useAppSelector } from 'hooks/store-hooks'
+
+import { ReactComponent as NoFoodIcon } from 'assets/icons/no-food.svg'
 
 export const Foods: React.FC = () => {
   const userId = useAppSelector(state => state.auth.user?.localId)
@@ -40,13 +42,11 @@ export const Foods: React.FC = () => {
       ))}
     </div>
   ) : (
-    <div className="flex flex-col items-center gap-4">
-      <NoFoodIcon />
-      <h2 className="text-xl text-center font-semibold text-gray-900 mt-4">
-        No meals available at this moment.
-      </h2>
-      <p className="text-slate-500">We have to get our chefs to work...</p>
-    </div>
+    <NotFoundContent
+      icon={<NoFoodIcon />}
+      header="No meals available at this moment."
+      secondaryText="We have to get our chefs to work..."
+    />
   )
 
   return (
