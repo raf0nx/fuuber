@@ -39,7 +39,7 @@ const server = setupServer(
   )
 )
 
-describe('<FoodCardItem />', () => {
+describe('<Foods />', () => {
   beforeAll(() => server.listen())
 
   afterEach(() => server.resetHandlers())
