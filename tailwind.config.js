@@ -41,12 +41,33 @@ module.exports = {
             transform: 'rotateX(0deg)',
           },
         },
+        scale: {
+          '0%': {
+            transform: 'scale(0)',
+          },
+          '50%': {
+            transform: 'scale(2)',
+          },
+          '100%': {
+            transform: 'scale(1)',
+          },
+        },
+        'scale-down': {
+          '0%': {
+            transform: 'scale(1)',
+          },
+          '100%': {
+            transform: 'scale(0)',
+          },
+        },
       },
       animation: {
         shake: 'shake 1.2s ease-in-out',
         'fade-out': 'fade-out .3s linear',
         'slide-in': 'slide-in .7s ease-in',
         'rotate-x': 'rotate-x .4s ease-in-out forwards',
+        scale: 'scale .3s ease-in-out',
+        'scale-down': 'scale-down .2s ease-in-out',
       },
       width: {
         128: '32rem',
