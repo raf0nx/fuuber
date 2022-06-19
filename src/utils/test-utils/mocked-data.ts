@@ -71,4 +71,4 @@ export const FOODS_MOCK = [
 
 export const FOOD_ITEM_MOCK = FOODS_MOCK[0]
 
-export const FAVOURITES_IDS_MOCK = ['2', '0', '5']
+export const FAVOURITES_IDS_MOCK = ['2', '3', '5']
