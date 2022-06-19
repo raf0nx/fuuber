@@ -5,9 +5,9 @@ import FoodsGrid from 'components/UI/FoodsGrid'
 import Alert from 'components/UI/Alert'
 import FoodCardSkeleton from 'components/UI/FoodCardSkeleton'
 import NotFoundContent from 'components/UI/NotFoundContent'
+import ResponsiveGrid from 'components/UI/ResponsiveGrid'
 
 import { useGetFoodsQuery } from 'api/food'
-
 import { useLazyGetFavouritesQuery } from 'api/favourites'
 import { useAppSelector } from 'hooks/store-hooks'
 
@@ -26,13 +26,13 @@ export const Foods: React.FC = () => {
   const areThereAnyFood = !!foods?.length
 
   const skeletonLoaders = (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
+    <ResponsiveGrid>
       {Array(12)
         .fill(0)
         .map((_, idx) => (
           <FoodCardSkeleton key={idx} />
         ))}
-    </div>
+    </ResponsiveGrid>
   )
 
   const foodsContent = areThereAnyFood ? (
