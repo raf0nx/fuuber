@@ -6,9 +6,15 @@ export const Favourites: React.FC = () => {
   const availableMeals = useAppSelector(state => state.food.availableMeals)
 
   const favouritesCount = favouritesIds?.length
-  const favouriteMeals = favouritesIds
-    ? availableMeals?.filter(meal => favouritesIds.includes(meal.id))
-    : []
+  // Filter out only favourites from all available meals and sort them by most recently added
+  const favouriteMeals =
+    availableMeals && favouritesIds
+      ? availableMeals
+          .filter(meal => favouritesIds.includes(meal.id))
+          .sort(
+            (a, b) => favouritesIds.indexOf(b.id) - favouritesIds.indexOf(a.id)
+          )
+      : []
 
   return (
     <section className="container mx-auto p-4">
