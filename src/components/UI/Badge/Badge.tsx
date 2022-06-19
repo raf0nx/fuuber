@@ -10,6 +10,7 @@ export const Badge: React.FC<{ classes?: string }> = ({
         'absolute w-4 h-4 rounded-full text-xs text-center',
         classes
       )}
+      role="presentation"
     >
       {children}
     </span>
