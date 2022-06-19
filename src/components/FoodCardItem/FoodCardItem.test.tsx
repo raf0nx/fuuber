@@ -5,7 +5,11 @@ import { setupServer } from 'msw/node'
 
 import { FoodCardItem } from './FoodCardItem'
 
-import { FOOD_ITEM_MOCK, USER_DATA_MOCK } from 'utils/test-utils/mocked-data'
+import {
+  FAVOURITES_IDS_MOCK,
+  FOOD_ITEM_MOCK,
+  USER_DATA_MOCK,
+} from 'utils/test-utils/mocked-data'
 import { customRender } from 'utils/test-utils/CustomRender'
 import { firebaseConfig } from 'config/config'
 
@@ -151,7 +155,7 @@ describe('<FoodCardItem />', () => {
       customRender(<FoodCardItem item={FOOD_ITEM_MOCK} />, {
         initialState: {
           auth: { user: USER_DATA_MOCK },
-          favourites: { favouritesIds: ['5', '6'] },
+          favourites: { favouritesIds: FAVOURITES_IDS_MOCK },
         },
       })
 

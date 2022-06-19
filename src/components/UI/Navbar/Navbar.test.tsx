@@ -1,9 +1,10 @@
+import { MemoryRouter } from 'react-router-dom'
 import { screen } from '@testing-library/react'
 
 import { Navbar } from './Navbar'
 
 import { customRender } from 'utils/test-utils/CustomRender'
-import { MemoryRouter } from 'react-router-dom'
+import { FAVOURITES_IDS_MOCK } from 'utils/test-utils/mocked-data'
 
 describe('<Navbar />', () => {
   test('Should display a Badge with favourite foods count', () => {
@@ -13,7 +14,7 @@ describe('<Navbar />', () => {
         <Navbar />
       </MemoryRouter>,
       {
-        initialState: { favourites: { favouritesIds: ['0', '1', '2'] } },
+        initialState: { favourites: { favouritesIds: FAVOURITES_IDS_MOCK } },
       }
     )
 
