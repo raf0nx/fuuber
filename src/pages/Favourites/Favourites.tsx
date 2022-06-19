@@ -1,4 +1,4 @@
-import FoodCardItem from 'components/FoodCardItem'
+import FoodsGrid from 'components/UI/FoodsGrid'
 import NotFoundContent from 'components/UI/NotFoundContent'
 
 import { useAppSelector } from 'hooks/store-hooks'
@@ -30,11 +30,7 @@ export const Favourites: React.FC = () => {
         <hr />
       </header>
       {!!favouriteMeals.length ? (
-        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
-          {favouriteMeals.map(item => (
-            <FoodCardItem item={item} key={item.id} />
-          ))}
-        </div>
+        <FoodsGrid foods={favouriteMeals} />
       ) : (
         <NotFoundContent
           header="You have no favourite meals at this moment"

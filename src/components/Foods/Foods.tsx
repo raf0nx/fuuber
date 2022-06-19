@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { CSSTransition } from 'react-transition-group'
 
-import FoodCardItem from 'components/FoodCardItem'
+import FoodsGrid from 'components/UI/FoodsGrid'
 import Alert from 'components/UI/Alert'
 import FoodCardSkeleton from 'components/UI/FoodCardSkeleton'
 import NotFoundContent from 'components/UI/NotFoundContent'
@@ -36,11 +36,7 @@ export const Foods: React.FC = () => {
   )
 
   const foodsContent = areThereAnyFood ? (
-    <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
-      {foods.map(item => (
-        <FoodCardItem item={item} key={item.id} />
-      ))}
-    </div>
+    <FoodsGrid foods={foods} />
   ) : (
     <NotFoundContent
       icon={<NoFoodIcon />}
