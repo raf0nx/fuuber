@@ -27,11 +27,22 @@ export const Favourites: React.FC = () => {
         </p>
         <hr />
       </header>
-      <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
-        {favouriteMeals?.map(item => (
-          <FoodCardItem item={item} key={item.id} />
-        ))}
-      </div>
+      {!!favouriteMeals.length ? (
+        <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 auto-rows-auto gap-8">
+          {favouriteMeals.map(item => (
+            <FoodCardItem item={item} key={item.id} />
+          ))}
+        </div>
+      ) : (
+        <div className="flex flex-col items-center gap-4">
+          <h2 className="text-xl text-center font-semibold text-gray-900 mt-4">
+            You have no favourite meals at this moment
+          </h2>
+          <p className="text-slate-500">
+            They will appear here as soon as you add some
+          </p>
+        </div>
+      )}
     </section>
   )
 }
