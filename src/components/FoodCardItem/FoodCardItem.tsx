@@ -2,6 +2,7 @@ import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
+import { useSnackbar } from 'notistack'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
@@ -23,7 +24,14 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const favouritesIds = useAppSelector(state => state.favourites.favouritesIds)
   const [updateFavourites] = useUpdateFavouritesMutation()
 
+  const { enqueueSnackbar } = useSnackbar()
+
   const isItemFavourite = !!favouritesIds && favouritesIds.includes(item.id)
+
+  const getAddToFavouriteSnackbarMessage = () =>
+    isItemFavourite
+      ? `${item.name}'s been removed from favourites`
+      : `${item.name}'s been added to favorites`
 
   const pushNewFavourite = () =>
     favouritesIds ? [...favouritesIds, item.id] : [item.id]
@@ -33,10 +41,22 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
       ? favouritesIds.filter(id => id !== item.id)
       : pushNewFavourite()
 
-  const toggleFavouriteHandler = () => {
+  const toggleFavouriteHandler = async () => {
     if (!userId) return
 
-    updateFavourites({ userId, favouritesIds: updateFavouritesIds() })
+    try {
+      await updateFavourites({
+        userId,
+        favouritesIds: updateFavouritesIds(),
+      }).unwrap()
+      enqueueSnackbar(getAddToFavouriteSnackbarMessage(), {
+        variant: 'success',
+      })
+    } catch {
+      enqueueSnackbar('Adding meal to favourite failed! Please try again', {
+        variant: 'error',
+      })
+    }
   }
 
   return (
