@@ -20,7 +20,7 @@ export const Foods: React.FC = () => {
   const [fetchFavourites] = useLazyGetFavouritesQuery()
 
   useEffect(() => {
-    userId && fetchFavourites(userId)
+    userId && fetchFavourites(userId, true)
   }, [userId, fetchFavourites])
 
   const areThereAnyFood = !!foods?.length
