@@ -12,6 +12,7 @@ import { useAppSelector } from 'hooks/store-hooks'
 import { isKeyEnterOrSpace } from 'utils/utils'
 
 import { Food } from 'types/food'
+import FoodModal from 'components/UI/FoodModal'
 
 interface FoodCardItemProps {
   item: Food
@@ -19,6 +20,7 @@ interface FoodCardItemProps {
 
 export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const [isCardFocused, setIsCardFocused] = useState(false)
+  const [isModalOpened, setIsModalOpened] = useState(false)
 
   const userId = useAppSelector(state => state.auth.user?.localId)
   const favouritesIds = useAppSelector(state => state.favourites.favouritesIds)
@@ -60,63 +62,73 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   }
 
   return (
-    <Card
-      classes={classNames(
-        'cursor-pointer hover:scale-105 hover:shadow-lg transition-transform relative',
-        { 'scale-105': isCardFocused }
-      )}
-      onMouseEnter={() => setIsCardFocused(true)}
-      onMouseLeave={() => setIsCardFocused(false)}
-      onFocus={() => setIsCardFocused(true)}
-      tabIndex={0}
-      ariaLabelledby={`articleHeading${item.id}`}
-    >
-      {isCardFocused && (
-        <div
-          className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
-          onClick={toggleFavouriteHandler}
-          onKeyDown={({ nativeEvent }) =>
-            isKeyEnterOrSpace(nativeEvent.code) && toggleFavouriteHandler()
-          }
-          tabIndex={0}
-          aria-label={
-            isItemFavourite ? 'Remove from favourites' : 'Add to favourites'
-          }
-          role="button"
-        >
-          {isItemFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
-        </div>
-      )}
-      <img
-        src={item.img}
-        className="rounded-t w-full h-60 object-cover"
-        alt=""
-      />
-      <div className="p-4">
-        <h3
-          id={`articleHeading${item.id}`}
-          className="text-lg font-semibold text-gray-900 mb-2 truncate"
-        >
-          {item.name}
-        </h3>
-        <p className="text-slate-500 text-sm line-clamp-3 h-15">
-          {item.description}
-        </p>
-        <hr className="my-4" />
-        <div className="flex items-center justify-between">
-          <p className="font-semibold text-2xl text-indigo-500">
-            $ {item.price}
-          </p>
-          <Button
-            category="primary"
-            name="Open modal"
-            onBlur={() => setIsCardFocused(false)}
-            ariaLabel="Open modal with meal details"
+    <>
+      <Card
+        classes={classNames(
+          'cursor-pointer hover:scale-105 hover:shadow-lg transition-transform relative',
+          { 'scale-105': isCardFocused }
+        )}
+        onMouseEnter={() => setIsCardFocused(true)}
+        onMouseLeave={() => setIsCardFocused(false)}
+        onFocus={() => setIsCardFocused(true)}
+        tabIndex={0}
+        ariaLabelledby={`articleHeading${item.id}`}
+      >
+        {isCardFocused && (
+          <div
+            className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
+            onClick={toggleFavouriteHandler}
+            onKeyDown={({ nativeEvent }) =>
+              isKeyEnterOrSpace(nativeEvent.code) && toggleFavouriteHandler()
+            }
+            tabIndex={0}
+            aria-label={
+              isItemFavourite ? 'Remove from favourites' : 'Add to favourites'
+            }
+            role="button"
           >
-            <FaChevronRight />
-          </Button>
+            {isItemFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
+          </div>
+        )}
+        <img
+          src={item.img}
+          className="rounded-t w-full h-60 object-cover"
+          alt=""
+        />
+        <div className="p-4">
+          <h3
+            id={`articleHeading${item.id}`}
+            className="text-lg font-semibold text-gray-900 mb-2 truncate"
+          >
+            {item.name}
+          </h3>
+          <p className="text-slate-500 text-sm line-clamp-3 h-15">
+            {item.description}
+          </p>
+          <hr className="my-4" />
+          <div className="flex items-center justify-between">
+            <p className="font-semibold text-2xl text-indigo-500">
+              $ {item.price}
+            </p>
+            <Button
+              category="primary"
+              name="Open modal"
+              onBlur={() => setIsCardFocused(false)}
+              onClick={() => setIsModalOpened(true)}
+              ariaLabel="Open modal with meal details"
+            >
+              <FaChevronRight />
+            </Button>
+          </div>
         </div>
-      </div>
-    </Card>
+      </Card>
+      {isModalOpened && (
+        <FoodModal
+          item={item}
+          classNames="w-256 h-128 flex relative"
+          onClose={() => setIsModalOpened(false)}
+        />
+      )}
+    </>
   )
 }
