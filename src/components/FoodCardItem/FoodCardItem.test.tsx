@@ -2,6 +2,7 @@ import { screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
+import { SnackbarProvider } from 'notistack'
 
 import { FoodCardItem } from './FoodCardItem'
 
@@ -38,12 +39,17 @@ describe('<FoodCardItem />', () => {
   describe('With authenticated user', () => {
     beforeEach(() => {
       // eslint-disable-next-line testing-library/no-render-in-setup
-      customRender(<FoodCardItem item={FOOD_ITEM_MOCK} />, {
-        initialState: {
-          auth: { user: USER_DATA_MOCK },
-          favourites: { favouritesIds: null },
-        },
-      })
+      customRender(
+        <SnackbarProvider maxSnack={3}>
+          <FoodCardItem item={FOOD_ITEM_MOCK} />
+        </SnackbarProvider>,
+        {
+          initialState: {
+            auth: { user: USER_DATA_MOCK },
+            favourites: { favouritesIds: null },
+          },
+        }
+      )
     })
 
     test('Should not display Add to Favourite button initally', async () => {
@@ -133,11 +139,16 @@ describe('<FoodCardItem />', () => {
   describe('Without authenticated user', () => {
     test("Shouldn't add item to favourites if there is no authenticated user", async () => {
       // Given
-      customRender(<FoodCardItem item={FOOD_ITEM_MOCK} />, {
-        initialState: {
-          favourites: { favouritesIds: null },
-        },
-      })
+      customRender(
+        <SnackbarProvider maxSnack={3}>
+          <FoodCardItem item={FOOD_ITEM_MOCK} />
+        </SnackbarProvider>,
+        {
+          initialState: {
+            favourites: { favouritesIds: null },
+          },
+        }
+      )
 
       // When
       await userEvent.hover(screen.getByRole(/article/i))
@@ -152,12 +163,17 @@ describe('<FoodCardItem />', () => {
   describe('With already added favorites', () => {
     test('Should add to favorites even when there are already favorites present', async () => {
       // Given
-      customRender(<FoodCardItem item={FOOD_ITEM_MOCK} />, {
-        initialState: {
-          auth: { user: USER_DATA_MOCK },
-          favourites: { favouritesIds: FAVOURITES_IDS_MOCK },
-        },
-      })
+      customRender(
+        <SnackbarProvider maxSnack={3}>
+          <FoodCardItem item={FOOD_ITEM_MOCK} />
+        </SnackbarProvider>,
+        {
+          initialState: {
+            auth: { user: USER_DATA_MOCK },
+            favourites: { favouritesIds: FAVOURITES_IDS_MOCK },
+          },
+        }
+      )
 
       // When
       await userEvent.hover(screen.getByRole(/article/i))

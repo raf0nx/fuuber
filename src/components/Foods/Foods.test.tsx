@@ -1,6 +1,7 @@
 import { screen } from '@testing-library/react'
 import { setupServer } from 'msw/node'
 import { rest } from 'msw'
+import { SnackbarProvider } from 'notistack'
 
 import { Foods } from './Foods'
 
@@ -48,11 +49,16 @@ describe('<Foods />', () => {
 
   test('Should display all available foods from the server', async () => {
     // Given
-    customRender(<Foods />, {
-      initialState: {
-        auth: { user: USER_DATA_MOCK },
-      },
-    })
+    customRender(
+      <SnackbarProvider maxSnack={3}>
+        <Foods />
+      </SnackbarProvider>,
+      {
+        initialState: {
+          auth: { user: USER_DATA_MOCK },
+        },
+      }
+    )
 
     // Then
     expect(await screen.findAllByRole('article')).toHaveLength(2)
@@ -70,7 +76,11 @@ describe('<Foods />', () => {
       })
     )
 
-    customRender(<Foods />)
+    customRender(
+      <SnackbarProvider maxSnack={3}>
+        <Foods />
+      </SnackbarProvider>
+    )
 
     // Then
     expect(
@@ -90,7 +100,11 @@ describe('<Foods />', () => {
       })
     )
 
-    customRender(<Foods />)
+    customRender(
+      <SnackbarProvider maxSnack={3}>
+        <Foods />
+      </SnackbarProvider>
+    )
 
     // Then
     expect(

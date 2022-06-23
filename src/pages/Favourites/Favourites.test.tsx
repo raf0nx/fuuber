@@ -1,4 +1,5 @@
 import { screen } from '@testing-library/react'
+import { SnackbarProvider } from 'notistack'
 
 import { Favourites } from './Favourites'
 
@@ -8,12 +9,17 @@ import { FAVOURITES_IDS_MOCK, FOODS_MOCK } from 'utils/test-utils/mocked-data'
 describe('<Favourites />', () => {
   test('Should correctly show favourites sorted by most recently added', async () => {
     // Given
-    customRender(<Favourites />, {
-      initialState: {
-        food: { availableMeals: FOODS_MOCK },
-        favourites: { favouritesIds: FAVOURITES_IDS_MOCK },
-      },
-    })
+    customRender(
+      <SnackbarProvider maxSnack={3}>
+        <Favourites />
+      </SnackbarProvider>,
+      {
+        initialState: {
+          food: { availableMeals: FOODS_MOCK },
+          favourites: { favouritesIds: FAVOURITES_IDS_MOCK },
+        },
+      }
+    )
 
     // Then
     // The first article should be the most recently added favourite (see favouriteIds mocked array)
@@ -28,12 +34,17 @@ describe('<Favourites />', () => {
 
   test('Should display an information to an end user when there are no favourite meals', async () => {
     // Given
-    customRender(<Favourites />, {
-      initialState: {
-        food: { availableMeals: FOODS_MOCK },
-        favourites: { favouritesIds: null },
-      },
-    })
+    customRender(
+      <SnackbarProvider maxSnack={3}>
+        <Favourites />
+      </SnackbarProvider>,
+      {
+        initialState: {
+          food: { availableMeals: FOODS_MOCK },
+          favourites: { favouritesIds: null },
+        },
+      }
+    )
 
     // Then
     expect(
