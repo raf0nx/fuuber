@@ -109,7 +109,7 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           </p>
           <Button
             category="primary"
-            name="Add to Cart"
+            name="Open modal"
             onBlur={() => setIsCardFocused(false)}
             ariaLabel="Open modal with meal details"
           >
