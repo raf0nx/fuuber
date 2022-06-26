@@ -5,39 +5,33 @@ import { CSSTransition } from 'react-transition-group'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
+import FoodModal from 'components/FoodModal'
+import AddToFavourite from 'components/AddToFavourite'
 
 import { isKeyEnterOrSpace } from 'utils/utils'
 
 import { Food } from 'types/food'
-import FoodModal from 'components/UI/FoodModal'
-import AddToFavourite from 'components/AddToFavourite'
 
-interface FoodCardItemProps {
-  item: Food
-}
+import './FoodCardItem.css'
 
-export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
-  const [isCardFocused, setIsCardFocused] = useState(false)
+export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
   const [isModalOpened, setIsModalOpened] = useState(false)
 
   return (
     <>
       <Card
+        id="foodCardItem"
         classes={classNames(
-          'cursor-pointer hover:scale-105 hover:shadow-lg transition-transform relative',
-          { 'scale-105': isCardFocused }
+          'cursor-pointer hover:shadow-lg hover:scale-105 transition-transform relative focus-within:scale-105 focus-within:shadow-lg'
         )}
         onClick={() => setIsModalOpened(true)}
         onKeyDown={({ nativeEvent }) =>
           isKeyEnterOrSpace(nativeEvent.code) && setIsModalOpened(true)
         }
-        onMouseEnter={() => setIsCardFocused(true)}
-        onMouseLeave={() => setIsCardFocused(false)}
-        onFocus={() => setIsCardFocused(true)}
         tabIndex={0}
         ariaLabelledby={`articleHeading${item.id}`}
       >
-        {isCardFocused && <AddToFavourite item={item} />}
+        <AddToFavourite item={item} />
         <img
           src={item.img}
           className="rounded-t w-full h-60 object-cover"
@@ -61,7 +55,6 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
             <Button
               category="primary"
               name="Open modal"
-              onBlur={() => setIsCardFocused(false)}
               onClick={event => {
                 event.stopPropagation()
                 setIsModalOpened(true)

@@ -52,6 +52,7 @@ export const AddToFavourite: React.FC<{ item: Food }> = ({ item }) => {
 
   return (
     <div
+      id="addToFavourite"
       className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
       onClick={event => toggleFavouriteHandler(event)}
       onKeyDown={event =>

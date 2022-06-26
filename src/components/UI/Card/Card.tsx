@@ -1,6 +1,7 @@
 import classNames from 'classnames'
 
 interface CardProps {
+  id?: string
   classes?: string
   tabIndex?: number
   ariaLabelledby?: string
@@ -13,6 +14,7 @@ interface CardProps {
 }
 
 export const Card: React.FC<CardProps> = ({
+  id,
   children,
   classes,
   tabIndex,
@@ -26,6 +28,7 @@ export const Card: React.FC<CardProps> = ({
 }) => {
   return (
     <article
+      id={id}
       className={classNames(
         'bg-white rounded-lg border border-gray-200 shadow-md',
         classes

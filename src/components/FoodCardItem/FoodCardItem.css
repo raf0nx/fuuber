@@ -1,0 +1,8 @@
+#foodCardItem:focus-within #addToFavourite,
+#foodCardItem:hover #addToFavourite {
+  display: flex;
+}
+
+#addToFavourite {
+  display: none;
+}
