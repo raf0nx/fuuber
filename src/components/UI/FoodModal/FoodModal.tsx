@@ -22,7 +22,7 @@ export const FoodModal: React.FC<FoodModalProps> = ({
   onClose,
 }) =>
   ReactDOM.createPortal(
-    <div className="absolute z-10 top-2/4 left-2/4 -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center">
       <Card classes={classNames}>
         <span
           className="absolute top-4 right-4 text-2xl text-gray-900 cursor-pointer"

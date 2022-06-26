@@ -3,6 +3,7 @@ import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
 import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
 import { useSnackbar } from 'notistack'
+import { CSSTransition } from 'react-transition-group'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
@@ -122,13 +123,24 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           </div>
         </div>
       </Card>
-      {isModalOpened && (
+      <CSSTransition
+        in={isModalOpened}
+        timeout={{
+          enter: 300,
+          exit: 500,
+        }}
+        classNames={{
+          enterActive: 'animate-slide-in',
+          exitActive: 'animate-slide-out',
+        }}
+        unmountOnExit
+      >
         <FoodModal
           item={item}
           classNames="w-256 h-128 flex relative"
           onClose={() => setIsModalOpened(false)}
         />
-      )}
+      </CSSTransition>
     </>
   )
 }
