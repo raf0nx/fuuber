@@ -18,7 +18,7 @@ export const AddToFavourite: React.FC<{ item: Food }> = ({ item }) => {
   const getAddToFavouriteSnackbarMessage = () =>
     isItemFavourite
       ? `${item.name}'s been removed from favourites`
-      : `${item.name}'s been added to favorites`
+      : `${item.name}'s been added to favourites`
 
   const pushNewFavourite = () =>
     favouritesIds ? [...favouritesIds, item.id] : [item.id]
@@ -40,6 +40,7 @@ export const AddToFavourite: React.FC<{ item: Food }> = ({ item }) => {
         userId,
         favouritesIds: updateFavouritesIds(),
       }).unwrap()
+
       enqueueSnackbar(getAddToFavouriteSnackbarMessage(), {
         variant: 'success',
       })
