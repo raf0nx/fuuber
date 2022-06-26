@@ -21,15 +21,6 @@ module.exports = {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
         },
-        'slide-in': {
-          '0%': { transform: 'skewX(53deg) translateX(-500px)', opacity: '0' },
-          '60%': { transform: 'translateX(0px)' },
-          '62%': { transform: 'skewX(0deg) translateX(30px)' },
-          '70%': { transform: 'skewX(-20deg)', opacity: '1' },
-          '80%': { transform: 'skewX(0deg) translate(0)' },
-          '90%': { transform: 'skewX(-5deg)' },
-          '100%': { transform: 'skewX(0deg)' },
-        },
         'rotate-x': {
           '0%': {
             transform: 'rotateX(-90deg)',
@@ -60,14 +51,39 @@ module.exports = {
             transform: 'scale(0)',
           },
         },
+        'slide-in': {
+          '0%': {
+            transform: 'translateX(-1500px) skewX(30deg) scaleX(1.3)',
+          },
+          '70%': {
+            transform: 'translateX(30px) skewX(0deg) scaleX(.9)',
+          },
+          '100%': {
+            transform: 'translateX(0px) skewX(0deg) scaleX(1)',
+          },
+        },
+        'slide-out': {
+          '0%': {
+            transform: 'translateX(0px) skewX(0deg) scaleX(1)',
+          },
+          '30%': {
+            transform: 'translateX(-30px) skewX(-5deg) scaleX(.9)',
+          },
+          '100%': {
+            transform: 'translateX(1500px) skewX(30deg) scaleX(1.3)',
+          },
+        },
       },
       animation: {
         shake: 'shake 1.2s ease-in-out',
         'fade-out': 'fade-out .3s linear',
-        'slide-in': 'slide-in .7s ease-in',
         'rotate-x': 'rotate-x .4s ease-in-out forwards',
         scale: 'scale .3s ease-in-out',
         'scale-down': 'scale-down .2s ease-in-out',
+        'slide-in':
+          'slide-in .3s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards',
+        'slide-out':
+          'slide-out .5s cubic-bezier(0.165, 0.840, 0.440, 1.000) forwards',
       },
       width: {
         128: '32rem',
