@@ -44,7 +44,11 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
       ? favouritesIds.filter(id => id !== item.id)
       : pushNewFavourite()
 
-  const toggleFavouriteHandler = async () => {
+  const toggleFavouriteHandler = async (
+    event: React.KeyboardEvent | React.MouseEvent
+  ) => {
+    event.stopPropagation()
+
     if (!userId) return
 
     try {
@@ -69,6 +73,10 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           'cursor-pointer hover:scale-105 hover:shadow-lg transition-transform relative',
           { 'scale-105': isCardFocused }
         )}
+        onClick={() => setIsModalOpened(true)}
+        onKeyDown={({ nativeEvent }) =>
+          isKeyEnterOrSpace(nativeEvent.code) && setIsModalOpened(true)
+        }
         onMouseEnter={() => setIsCardFocused(true)}
         onMouseLeave={() => setIsCardFocused(false)}
         onFocus={() => setIsCardFocused(true)}
@@ -78,9 +86,10 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
         {isCardFocused && (
           <div
             className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
-            onClick={toggleFavouriteHandler}
-            onKeyDown={({ nativeEvent }) =>
-              isKeyEnterOrSpace(nativeEvent.code) && toggleFavouriteHandler()
+            onClick={event => toggleFavouriteHandler(event)}
+            onKeyDown={event =>
+              isKeyEnterOrSpace(event.nativeEvent.code) &&
+              toggleFavouriteHandler(event)
             }
             tabIndex={0}
             aria-label={
@@ -115,7 +124,14 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
               category="primary"
               name="Open modal"
               onBlur={() => setIsCardFocused(false)}
-              onClick={() => setIsModalOpened(true)}
+              onClick={event => {
+                event.stopPropagation()
+                setIsModalOpened(true)
+              }}
+              onKeyDown={event => {
+                event.stopPropagation()
+                setIsModalOpened(true)
+              }}
               ariaLabel="Open modal with meal details"
             >
               <FaChevronRight />
