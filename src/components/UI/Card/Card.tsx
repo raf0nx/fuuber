@@ -5,7 +5,7 @@ interface CardProps {
   tabIndex?: number
   ariaLabelledby?: string
   onClick?: () => void
-  onKeyDown?: () => void
+  onKeyDown?: (event: React.KeyboardEvent) => void
   onMouseEnter?: () => void
   onMouseLeave?: () => void
   onFocus?: () => void

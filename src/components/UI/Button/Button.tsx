@@ -7,7 +7,8 @@ interface ButtonProps {
   disabled?: boolean
   classes?: string
   ariaLabel?: string
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent) => void
+  onKeyDown?: (event: React.KeyboardEvent) => void
   onFocus?: () => void
   onBlur?: () => void
 }
@@ -21,6 +22,7 @@ export const Button: React.FC<ButtonProps> = ({
   classes = '',
   ariaLabel,
   onClick,
+  onKeyDown,
   onFocus,
   onBlur,
 }) => {
@@ -50,6 +52,7 @@ export const Button: React.FC<ButtonProps> = ({
       disabled={disabled}
       aria-label={ariaLabel}
       onClick={onClick}
+      onKeyDown={onKeyDown}
       onFocus={onFocus}
       onBlur={onBlur}
     >
