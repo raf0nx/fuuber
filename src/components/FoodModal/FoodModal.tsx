@@ -3,8 +3,8 @@ import ReactDOM from 'react-dom'
 import { FaCartPlus } from 'react-icons/fa'
 import { MdClose } from 'react-icons/md'
 
-import Button from '../Button'
-import Card from '../Card'
+import Button from '../UI/Button'
+import Card from '../UI/Card'
 
 import { isKeyEnterOrSpace } from 'utils/utils'
 
