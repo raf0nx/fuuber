@@ -30,7 +30,7 @@ export const FoodModal: React.FC<FoodModalProps> = ({
           aria-label="Close modal"
           onClick={onClose}
           onKeyDown={({ nativeEvent }) =>
-            isKeyEnterOrSpace(nativeEvent.code) && onClose
+            isKeyEnterOrSpace(nativeEvent.code) && onClose()
           }
         >
           <MdClose />
