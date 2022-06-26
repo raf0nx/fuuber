@@ -1,19 +1,16 @@
 import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
-import { MdFavoriteBorder, MdFavorite } from 'react-icons/md'
-import { useSnackbar } from 'notistack'
 import { CSSTransition } from 'react-transition-group'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
 
-import { useUpdateFavouritesMutation } from 'api/favourites'
-import { useAppSelector } from 'hooks/store-hooks'
 import { isKeyEnterOrSpace } from 'utils/utils'
 
 import { Food } from 'types/food'
 import FoodModal from 'components/UI/FoodModal'
+import AddToFavourite from 'components/AddToFavourite'
 
 interface FoodCardItemProps {
   item: Food
@@ -22,49 +19,6 @@ interface FoodCardItemProps {
 export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
   const [isCardFocused, setIsCardFocused] = useState(false)
   const [isModalOpened, setIsModalOpened] = useState(false)
-
-  const userId = useAppSelector(state => state.auth.user?.localId)
-  const favouritesIds = useAppSelector(state => state.favourites.favouritesIds)
-  const [updateFavourites] = useUpdateFavouritesMutation()
-
-  const { enqueueSnackbar } = useSnackbar()
-
-  const isItemFavourite = !!favouritesIds && favouritesIds.includes(item.id)
-
-  const getAddToFavouriteSnackbarMessage = () =>
-    isItemFavourite
-      ? `${item.name}'s been removed from favourites`
-      : `${item.name}'s been added to favorites`
-
-  const pushNewFavourite = () =>
-    favouritesIds ? [...favouritesIds, item.id] : [item.id]
-
-  const updateFavouritesIds = () =>
-    isItemFavourite
-      ? favouritesIds.filter(id => id !== item.id)
-      : pushNewFavourite()
-
-  const toggleFavouriteHandler = async (
-    event: React.KeyboardEvent | React.MouseEvent
-  ) => {
-    event.stopPropagation()
-
-    if (!userId) return
-
-    try {
-      await updateFavourites({
-        userId,
-        favouritesIds: updateFavouritesIds(),
-      }).unwrap()
-      enqueueSnackbar(getAddToFavouriteSnackbarMessage(), {
-        variant: 'success',
-      })
-    } catch {
-      enqueueSnackbar('Adding meal to favourite failed! Please try again', {
-        variant: 'error',
-      })
-    }
-  }
 
   return (
     <>
@@ -83,23 +37,7 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
         tabIndex={0}
         ariaLabelledby={`articleHeading${item.id}`}
       >
-        {isCardFocused && (
-          <div
-            className="absolute w-9 h-9 bg-[#ff3259] text-white right-2 top-2 text-2xl flex items-center justify-center rounded-full transition-colors hover:bg-red-600"
-            onClick={event => toggleFavouriteHandler(event)}
-            onKeyDown={event =>
-              isKeyEnterOrSpace(event.nativeEvent.code) &&
-              toggleFavouriteHandler(event)
-            }
-            tabIndex={0}
-            aria-label={
-              isItemFavourite ? 'Remove from favourites' : 'Add to favourites'
-            }
-            role="button"
-          >
-            {isItemFavourite ? <MdFavorite /> : <MdFavoriteBorder />}
-          </div>
-        )}
+        {isCardFocused && <AddToFavourite item={item} />}
         <img
           src={item.img}
           className="rounded-t w-full h-60 object-cover"
@@ -130,7 +68,8 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
               }}
               onKeyDown={event => {
                 event.stopPropagation()
-                setIsModalOpened(true)
+                isKeyEnterOrSpace(event.nativeEvent.code) &&
+                  setIsModalOpened(true)
               }}
               ariaLabel="Open modal with meal details"
             >
@@ -139,6 +78,7 @@ export const FoodCardItem: React.FC<FoodCardItemProps> = ({ item }) => {
           </div>
         </div>
       </Card>
+      {/* Modal rendered as a document.body child */}
       <CSSTransition
         in={isModalOpened}
         timeout={{
