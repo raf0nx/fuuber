@@ -22,8 +22,11 @@ export const FoodModal: React.FC<FoodModalProps> = ({
   onClose,
 }) =>
   ReactDOM.createPortal(
-    <div className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center">
-      <Card classes={classNames}>
+    <div
+      className="absolute z-10 top-0 left-0 w-full h-full flex items-center justify-center"
+      role="presentation"
+    >
+      <Card classes={classNames} role="dialog">
         <span
           className="absolute top-4 right-4 text-2xl text-gray-900 cursor-pointer"
           tabIndex={0}
