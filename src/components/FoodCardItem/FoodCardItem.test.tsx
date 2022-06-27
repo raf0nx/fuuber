@@ -49,7 +49,7 @@ describe('<FoodCardItem />', () => {
     expect(screen.getByRole(/dialog/)).toBeInTheDocument()
   })
 
-  test('Should open a dialog with food details on FoodCardItem button click', async () => {
+  test("Should open a dialog with food details on 'Open modal with meal details' button click", async () => {
     // When
     await userEvent.click(
       screen.getByLabelText(/open modal with meal details/i)
@@ -59,7 +59,7 @@ describe('<FoodCardItem />', () => {
     expect(screen.getByRole(/dialog/)).toBeInTheDocument()
   })
 
-  test("Should open a dialog with Food details on [Space]/[Enter] keydown while FoodCardItem button is focused and close the dialog on 'Close modal' button [Space]/[Enter] keydown", async () => {
+  test("Should open a dialog with food details on [Space]/[Enter] keydown while 'Open modal with meal details' button is focused and close the dialog on 'Close modal' button [Space]/[Enter] keydown", async () => {
     // When
     await userEvent.tab()
     await userEvent.tab()
