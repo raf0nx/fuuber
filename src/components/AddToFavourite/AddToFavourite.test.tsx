@@ -52,7 +52,7 @@ describe('<AddToFavourite />', () => {
       )
     })
 
-    test('Should add item to favourites on Add to favourites click and remove item from favourites on Remove from favourites click', async () => {
+    test("Should add item to favourites on 'Add to favourites' button click and remove item from favourites on 'Remove from favourites' button click", async () => {
       // When
       await userEvent.click(screen.getByLabelText(/add to favourites/i))
 
@@ -74,7 +74,7 @@ describe('<AddToFavourite />', () => {
       ).toBeInTheDocument()
     })
 
-    test('Should add item to favourites on Add to favourites [Space]/[Enter] keydown', async () => {
+    test("Should add item to favourites on 'Add to favourites' button [Space]/[Enter] keydown", async () => {
       // When
       await userEvent.tab()
       await userEvent.keyboard('[Enter]')
@@ -140,7 +140,7 @@ describe('<AddToFavourite />', () => {
   })
 
   describe('With some server error', () => {
-    test('Should display error Snackbar when adding a new favourite item failed', async () => {
+    test('Should display Snackbar with error message when adding a new favourite item failed', async () => {
       // Given
       server.use(
         rest.put(

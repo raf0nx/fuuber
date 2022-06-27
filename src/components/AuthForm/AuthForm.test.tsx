@@ -142,7 +142,7 @@ describe('<AuthForm />', () => {
     await waitFor(() => expect(mockedUseHistory).toHaveBeenCalled())
   })
 
-  test('Should catch a server side error, display error message in the alert and dismiss the alert', async () => {
+  test('Should catch a server side error, display error message in the Alert and dismiss the Alert', async () => {
     // Given
     server.use(
       rest.post(

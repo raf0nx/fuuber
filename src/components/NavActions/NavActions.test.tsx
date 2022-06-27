@@ -37,7 +37,7 @@ describe('<NavActions />', () => {
     )
   })
 
-  test('Should open dropdown on avatar click', async () => {
+  test('Should open Dropdown on Avatar click', async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
 
@@ -45,7 +45,7 @@ describe('<NavActions />', () => {
     expect(screen.getByText(AUTH_USER_MOCK.email)).toBeInTheDocument()
   })
 
-  test('Should logout user on sign out click', async () => {
+  test("Should logout user on 'Sign out' click", async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     await userEvent.click(screen.getByText(/sign out/i))
@@ -54,7 +54,7 @@ describe('<NavActions />', () => {
     expect(mockedUseHistory).toBeCalledWith('/auth')
   })
 
-  test('Should logout user on sign out [Space]/[Enter] keydown', async () => {
+  test("Should logout user on 'Sign out' button [Space]/[Enter] keydown", async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     screen.getByText(/sign out/i).focus()
@@ -64,7 +64,7 @@ describe('<NavActions />', () => {
     expect(mockedUseHistory).toBeCalledWith('/auth')
   })
 
-  test('Should open dropdown on [Space]/[Enter]', async () => {
+  test('Should open Dropdown on [Space]/[Enter]', async () => {
     // When
     screen.getByRole(/button/i).focus()
     await userEvent.keyboard('[Enter]')
@@ -73,7 +73,7 @@ describe('<NavActions />', () => {
     expect(screen.getByText(AUTH_USER_MOCK.displayName)).toBeInTheDocument()
   })
 
-  test('Should close dropdown on [Escape] and focus dropdown activator', async () => {
+  test('Should close Dropdown on [Escape] and focus Dropdown activator', async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     await userEvent.keyboard('[Escape]')
@@ -86,7 +86,7 @@ describe('<NavActions />', () => {
     expect(screen.getByRole(/button/i)).toHaveFocus()
   })
 
-  test('Should close dropdown when last item is blurred', async () => {
+  test('Should close Dropdown when last item is blurred', async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     screen.getByText(/sign out/i).focus()
@@ -99,7 +99,7 @@ describe('<NavActions />', () => {
     )
   })
 
-  test('Should close dropdown when route is changed and leave it open when route is not changed', async () => {
+  test('Should close Dropdown when route is changed and leave it open when route is not changed', async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     await userEvent.click(screen.getByText(/profile/i))
@@ -116,7 +116,7 @@ describe('<NavActions />', () => {
     expect(await screen.findByText(AUTH_USER_MOCK.email)).toBeInTheDocument()
   })
 
-  test('Should close dropdown on click outside', async () => {
+  test('Should close Dropdown on click outside', async () => {
     // When
     await userEvent.click(screen.getByRole(/button/i))
     await userEvent.click(document.body)
