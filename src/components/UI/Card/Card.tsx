@@ -5,6 +5,7 @@ interface CardProps {
   classes?: string
   tabIndex?: number
   ariaLabelledby?: string
+  role?: string
   onClick?: () => void
   onKeyDown?: (event: React.KeyboardEvent) => void
   onMouseEnter?: () => void
@@ -19,6 +20,7 @@ export const Card: React.FC<CardProps> = ({
   classes,
   tabIndex,
   ariaLabelledby,
+  role,
   onClick,
   onKeyDown,
   onMouseEnter,
@@ -35,6 +37,7 @@ export const Card: React.FC<CardProps> = ({
       )}
       tabIndex={tabIndex}
       aria-labelledby={ariaLabelledby}
+      role={role}
       onClick={onClick}
       onKeyDown={onKeyDown}
       onMouseEnter={onMouseEnter}
