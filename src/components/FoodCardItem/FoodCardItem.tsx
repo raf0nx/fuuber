@@ -1,4 +1,3 @@
-import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
 
@@ -9,13 +8,15 @@ import AddToFavourite from 'components/AddToFavourite'
 import Modal from 'components/UI/Modal'
 
 import { isKeyEnterOrSpace } from 'utils/utils'
+import { useElementVisible } from 'hooks/use-element-visible'
 
 import { Food } from 'types/food'
 
 import './FoodCardItem.css'
 
 export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
-  const [isModalOpened, setIsModalOpened] = useState(false)
+  const { ref, isElementVisible, setIsElementVisible } =
+    useElementVisible<HTMLDivElement>(false)
 
   return (
     <>
@@ -24,9 +25,9 @@ export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
         classes={classNames(
           'cursor-pointer hover:shadow-lg hover:scale-105 transition-transform relative focus-within:scale-105 focus-within:shadow-lg'
         )}
-        onClick={() => setIsModalOpened(true)}
+        onClick={() => setIsElementVisible(true)}
         onKeyDown={({ nativeEvent }) =>
-          isKeyEnterOrSpace(nativeEvent.code) && setIsModalOpened(true)
+          isKeyEnterOrSpace(nativeEvent.code) && setIsElementVisible(true)
         }
         tabIndex={0}
         ariaLabelledby={`articleHeading${item.id}`}
@@ -57,12 +58,12 @@ export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
               name="Open modal"
               onClick={event => {
                 event.stopPropagation()
-                setIsModalOpened(true)
+                setIsElementVisible(true)
               }}
               onKeyDown={event => {
                 event.stopPropagation()
                 isKeyEnterOrSpace(event.nativeEvent.code) &&
-                  setIsModalOpened(true)
+                  setIsElementVisible(true)
               }}
               ariaLabel="Open modal with meal details"
             >
@@ -72,11 +73,12 @@ export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
         </div>
       </Card>
       {/* Modal rendered as a document.body child */}
-      <Modal show={isModalOpened}>
+      <Modal show={isElementVisible}>
         <FoodModal
           item={item}
           classNames="w-256 h-128 flex relative"
-          onClose={() => setIsModalOpened(false)}
+          onClose={() => setIsElementVisible(false)}
+          ref={ref}
         />
       </Modal>
     </>
