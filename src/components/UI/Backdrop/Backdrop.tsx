@@ -15,6 +15,7 @@ export const Backdrop: React.FC<{ show: boolean }> = ({ show }) =>
       <div
         className="absolute z-10 top-0 left-0 w-full h-full bg-black/50"
         role="presentation"
+        aria-hidden="true"
       />
     </CSSTransition>,
     document.body

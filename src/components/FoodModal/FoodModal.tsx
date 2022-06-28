@@ -23,6 +23,7 @@ export const FoodModal = React.forwardRef<HTMLDivElement, FoodModalProps>(
       ref={ref}
       ariaLabelledby={`foodModal${item.id}Header`}
       ariaDescribedBy={`foodModal${item.id}Description`}
+      ariaModal={true}
     >
       <span
         className="absolute top-4 right-4 text-2xl text-gray-900 cursor-pointer"
