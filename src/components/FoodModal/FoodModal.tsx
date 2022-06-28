@@ -17,7 +17,13 @@ interface FoodModalProps {
 
 export const FoodModal = React.forwardRef<HTMLDivElement, FoodModalProps>(
   ({ item, classNames, onClose }, ref) => (
-    <Card classes={classNames} role="dialog" ref={ref}>
+    <Card
+      classes={classNames}
+      role="dialog"
+      ref={ref}
+      ariaLabelledby={`foodModal${item.id}Header`}
+      ariaDescribedBy={`foodModal${item.id}Description`}
+    >
       <span
         className="absolute top-4 right-4 text-2xl text-gray-900 cursor-pointer"
         tabIndex={0}
@@ -32,10 +38,16 @@ export const FoodModal = React.forwardRef<HTMLDivElement, FoodModalProps>(
       <img className="w-1/2 rounded-l-lg object-cover" src={item.img} alt="" />
       <div className="flex flex-col w-1/2 px-8 py-4 justify-between">
         <div className="flex flex-col">
-          <h1 className="text-2xl text-gray-900 font-semibold mb-2">
+          <h1
+            className="text-2xl text-gray-900 font-semibold mb-2"
+            id={`foodModal${item.id}Header`}
+          >
             {item.name}
           </h1>
-          <p className="text-slate-500 text-sm  max-h-28 line-clamp-5">
+          <p
+            className="text-slate-500 text-sm  max-h-28 line-clamp-5"
+            id={`foodModal${item.id}Description`}
+          >
             {item.description}
           </p>
           <hr className="my-4" />

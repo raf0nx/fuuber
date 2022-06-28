@@ -6,6 +6,7 @@ interface CardProps {
   classes?: string
   tabIndex?: number
   ariaLabelledby?: string
+  ariaDescribedBy?: string
   role?: string
   children?: JSX.Element | JSX.Element[]
   onClick?: () => void
@@ -24,6 +25,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
       classes,
       tabIndex,
       ariaLabelledby,
+      ariaDescribedBy,
       role,
       onClick,
       onKeyDown,
@@ -44,6 +46,7 @@ export const Card = React.forwardRef<HTMLDivElement, CardProps>(
         )}
         tabIndex={tabIndex}
         aria-labelledby={ariaLabelledby}
+        aria-describedby={ariaDescribedBy}
         role={role}
         onClick={onClick}
         onKeyDown={onKeyDown}
