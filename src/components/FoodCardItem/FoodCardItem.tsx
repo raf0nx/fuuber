@@ -1,12 +1,12 @@
 import { useState } from 'react'
 import classNames from 'classnames'
 import { FaChevronRight } from 'react-icons/fa'
-import { CSSTransition } from 'react-transition-group'
 
 import Button from 'components/UI/Button'
 import Card from 'components/UI/Card'
 import FoodModal from 'components/FoodModal'
 import AddToFavourite from 'components/AddToFavourite'
+import Modal from 'components/UI/Modal'
 
 import { isKeyEnterOrSpace } from 'utils/utils'
 
@@ -72,24 +72,13 @@ export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
         </div>
       </Card>
       {/* Modal rendered as a document.body child */}
-      <CSSTransition
-        in={isModalOpened}
-        timeout={{
-          enter: 300,
-          exit: 500,
-        }}
-        classNames={{
-          enterActive: 'animate-slide-in',
-          exitActive: 'animate-slide-out',
-        }}
-        unmountOnExit
-      >
+      <Modal show={isModalOpened}>
         <FoodModal
           item={item}
           classNames="w-256 h-128 flex relative"
           onClose={() => setIsModalOpened(false)}
         />
-      </CSSTransition>
+      </Modal>
     </>
   )
 }
