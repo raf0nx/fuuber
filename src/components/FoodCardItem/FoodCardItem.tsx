@@ -76,7 +76,7 @@ export const FoodCardItem: React.FC<{ item: Food }> = ({ item }) => {
       <Modal show={isElementVisible}>
         <FoodModal
           item={item}
-          classNames="w-256 h-128 flex relative"
+          classNames="w-256 h-128 flex relative border-0 shadow-2xl"
           onClose={() => setIsElementVisible(false)}
           ref={ref}
         />
