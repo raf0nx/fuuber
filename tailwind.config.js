@@ -17,6 +17,10 @@ module.exports = {
           '95%': { transform: 'translateX(-5px)' },
           '100%': { transform: 'translateX(0)' },
         },
+        'fade-in': {
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
+        },
         'fade-out': {
           '0%': { opacity: '1' },
           '100%': { opacity: '0' },
@@ -76,6 +80,7 @@ module.exports = {
       },
       animation: {
         shake: 'shake 1.2s ease-in-out',
+        'fade-in': 'fade-in .3s linear',
         'fade-out': 'fade-out .3s linear',
         'rotate-x': 'rotate-x .4s ease-in-out forwards',
         scale: 'scale .3s ease-in-out',
