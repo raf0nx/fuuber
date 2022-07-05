@@ -2,6 +2,7 @@ import React, { useMemo } from 'react'
 import { useDispatch } from 'react-redux'
 import { NavLink, useHistory } from 'react-router-dom'
 import { FiLogOut, FiSettings, FiUser } from 'react-icons/fi'
+import { FaShoppingCart } from 'react-icons/fa'
 
 import Dropdown from 'components/UI/Dropdown'
 import { Avatar } from 'components/UI/Avatar'
@@ -65,8 +66,17 @@ export const NavActions: React.FC = () => {
   )
 
   return (
-    <Dropdown items={dropdownItems} classes="top-10 right-0 w-44">
-      <Avatar imageUrl={authUser?.photoUrl} />
-    </Dropdown>
+    <div className="flex items-center gap-4">
+      <div
+        className="text-xl cursor-pointer rounded-full hover:bg-slate-100/30 p-2"
+        aria-label="Open cart"
+        tabIndex={0}
+      >
+        <FaShoppingCart />
+      </div>
+      <Dropdown items={dropdownItems} classes="top-10 right-0 w-44">
+        <Avatar imageUrl={authUser?.photoUrl} />
+      </Dropdown>
+    </div>
   )
 }
