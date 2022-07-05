@@ -26,7 +26,7 @@ export const FoodModal = React.forwardRef<HTMLDivElement, FoodModalProps>(
       ariaModal={true}
     >
       <span
-        className="absolute top-4 right-4 text-2xl text-gray-900 cursor-pointer"
+        className="absolute top-3 right-3 text-2xl text-gray-900 cursor-pointer rounded-full hover:bg-neutral-100 p-1"
         tabIndex={0}
         aria-label="Close modal"
         onClick={onClose}
