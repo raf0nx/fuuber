@@ -13,7 +13,7 @@ export const Home: React.FC = () => {
         </h1>
         <p className="text-slate-500 font-medium mb-6">
           Choose a food category and order your favorite dish delivered to your
-          door. You can find anything you fancy on React Food.
+          door. You can find anything you fancy on Fuuber.
         </p>
         <hr />
       </header>

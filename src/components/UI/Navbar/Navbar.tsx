@@ -19,7 +19,7 @@ export const Navbar: React.FC = () => {
         exact
         className="font-bold text-xl flex items-center gap-2"
       >
-        <FaHamburger /> React Food
+        <FaHamburger /> Fuuber
       </NavLink>
       <ul className="flex gap-12 font-semibold transition-colors">
         <li>
