@@ -27,6 +27,10 @@ Welcome to `Fuuber` – your go-to food order application! Explore a variety of 
 
 Access the live application [here](https://food-order-app-9f2a7.web.app). Start exploring the culinary world with `Fuuber`!
 
+**Note:** Occasionally, the deployment may encounter issues. For a smoother experience, watch the video demo below to get a feel for how the application works.
+
+![fuuber_demo](https://github.com/raf0nx/fuuber/assets/69021954/c405b7d2-92bd-457d-a159-3d41e0ab02b8)
+
 ## Local Development
 
 To run `Fuuber` locally, follow these steps:
